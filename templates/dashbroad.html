@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+
+<!-- nav bar -->
+{% include 'includes/nav.html' %}
+
+
+    <!--  dashbroad -->
+    <div class="profile w-full max-w-[1100px] mx-auto p-5">
+      <!-- profile card start -->
+      <div class="card bg-base-100 shadow-xl/30 shadow-black-800 p-3 flex justify-center items-center md:flex-row flex-col gap-10"
+      >
+        <div class="img">
+          <img src="logo.jpeg" class="rounded-[50%] w-[200px]" alt="" />
+        </div>
+
+        <div class="details">
+          <h1 class="text-3xl text-orange-300 font-bold">Profile Name</h1>
+          <p class="text-black">
+            Here you can manage your profile, view your events, and more.
+          </p>
+          <a href="#" class="edit_btn btn btn-accent btn-gradient my-3"
+            >Edit profile</a
+          >
+        </div>
+
+        <div class="event_details">
+          <h1 class="text-2xl text-orange-300 font-bold">Events Details</h1>
+          <p class="text-black capitalize my-3">
+            event Registered:
+            <span
+              class="bg-orange-300 py-1 px-2 rounded-xl capitalize font-bold"
+              >5</span
+            >
+          </p>
+          <p class="text-black capitalize my-3">
+            event participated:
+            <span
+              class="bg-orange-300 py-1 px-2 rounded-xl capitalize font-bold"
+              >3</span
+            >
+          </p>
+        </div>
+      </div>
+      <!-- profile card end -->
+
+
+      <hr class="my-10 border-1 border-black rounded-xl" />
+
+      <!-- user event  -->
+
+      <div class="profile_events flex flex-col justify-center items-center">
+        <h1 class="text-2xl  font-bold my-5">
+           Registered Events
+        </h1>
+        <div class="card sm:card-side max-w-sm sm:max-w-full ring-gray-500 rounded-2xl ring-2">
+          <figure>
+            <img
+              src="https://cdn.flyonui.com/fy-assets/components/card/image-7.png"
+              alt="headphone"
+            />
+          </figure>
+          <div class="card-body ">
+            <h5 class="card-title mb-0.5">Airpods Max</h5>
+            <p class="mb-2">
+              This is a wider card with supporting text below as a natural
+              lead-in to additional content.
+            </p>
+            <div class="card-actions">
+              <button class="btn btn-primary">Buy Now</button>
+              <button class="btn btn-secondary btn-soft">Add to cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- club events  -->
+
+       <div class="profile_events flex flex-col justify-center items-center">
+        <h1 class="text-2xl  font-bold my-5">
+           All Events
+        </h1>
+        <div class="card sm:card-side max-w-sm sm:max-w-full ring-gray-500 rounded-2xl ring-2">
+          <figure>
+            <img
+              src="https://cdn.flyonui.com/fy-assets/components/card/image-7.png"
+              alt="headphone"
+            />
+          </figure>
+          <div class="card-body ">
+            <h5 class="card-title mb-0.5">Airpods Max</h5>
+            <p class="mb-2">
+              This is a wider card with supporting text below as a natural
+              lead-in to additional content.
+            </p>
+            <div class="card-actions">
+              <button class="btn btn-primary">Buy Now</button>
+              <button class="btn btn-secondary btn-soft">Add to cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- dashbroad end -->
+    </div>
+{% endblock %}

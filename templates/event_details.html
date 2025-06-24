@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+
+<!-- nav bar -->
+{% include 'includes/nav.html' %}
+
+
+
+    <!-- event details -->
+    <div class="event_details flex lg:items-center flex-col">
+      <!-- event images -->
+      <div class="event_imgs max-w-[1100px] mx-3 my-4">
+        <div
+          id="image"
+          data-carousel='{"loadingClasses": "opacity-0","isInfiniteLoop": true,"isAutoPlay": true, "speed": 3000 }'
+          class="relative w-full"
+        >
+          <div class="carousel">
+            <div class="carousel-body h-full opacity-0">
+              <!-- Slide 1 -->
+              <div class="carousel-slide">
+                <div class="flex h-full justify-center">
+                  <img
+                    src="https://cdn.flyonui.com/fy-assets/components/carousel/image-22.png"
+                    class="size-full object-cover"
+                    alt="game"
+                  />
+                </div>
+              </div>
+              <!-- Slide 2 -->
+              <div class="carousel-slide">
+                <div class="flex h-full justify-center">
+                  <img
+                    src="https://cdn.flyonui.com/fy-assets/components/carousel/image-15.png"
+                    class="size-full object-cover"
+                    alt="vrbox"
+                  />
+                </div>
+              </div>
+              <!-- Slide 3 -->
+              <div class="carousel-slide">
+                <div class="flex h-full justify-center">
+                  <img
+                    src="https://cdn.flyonui.com/fy-assets/components/carousel/image-16.png"
+                    class="size-full object-cover"
+                    alt="laptop"
+                  />
+                </div>
+              </div>
+              <!-- Slide 4 -->
+              <div class="carousel-slide">
+                <div class="flex h-full justify-center">
+                  <img
+                    src="https://cdn.flyonui.com/fy-assets/components/carousel/image-8.png"
+                    class="size-full object-cover"
+                    alt="VRBox"
+                  />
+                </div>
+              </div>
+              <!-- Slide 5 -->
+              <div class="carousel-slide">
+                <div class="flex h-full justify-center">
+                  <img
+                    src="https://cdn.flyonui.com/fy-assets/components/carousel/image-23.png"
+                    class="size-full object-cover"
+                    alt="iwatch"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Previous Slide -->
+          <button
+            type="button"
+            class="carousel-prev start-5 max-sm:start-3 carousel-disabled:opacity-50 size-9.5 bg-base-100 flex items-center justify-center rounded-full shadow-base-300/20 shadow-sm"
+          >
+            <span
+              class="icon-[tabler--chevron-left] size-5 cursor-pointer"
+            ></span>
+            <span class="sr-only">Previous</span>
+          </button>
+          <!-- Next Slide -->
+          <button
+            type="button"
+            class="carousel-next end-5 max-sm:end-3 carousel-disabled:opacity-50 size-9.5 bg-base-100 flex items-center justify-center rounded-full shadow-base-300/20 shadow-sm"
+          >
+            <span class="icon-[tabler--chevron-right] size-5"></span>
+            <span class="sr-only">Next</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- event details -->
+      <div
+        class="event_content p-6 flex flex-col items-center gap-8 justify-center max-w-[1200px]"
+      >
+      
+        <div class="details flex flex-col md:flex-row gap-5">
+
+          <div class="w-full flex flex-col gap-3">
+            <h1 class="text-5xl font-mono capitalize text-black font-bold">
+              K2K culb knowledge sharing event
+            </h1>
+
+            <div class="main_details">
+              <h5 class="text-gray-800 text-xl mb-2">
+                <span class="icon-[fa6-solid--location-dot] mr-2"></span>
+                SRM main block
+              </h5>
+              <h5 class="text-gray-800 text-xl mb-2">
+                <span class="icon-[fa6-solid--clock] mr-2"></span
+                >12-06-2006,<span>6pm - 8pm</span>
+              </h5>
+              <h5 class="text-gray-800 text-xl mb-2">
+                Entry: <span class="font-bold text-green-500 ">$100</span>
+              </h5>
+            </div>
+
+          </div>
+
+          <div class="md:w-3/5 ticket_price w-full">
+            <div class="card sm:max-w-sm shadow-2xl">
+              <div class="card-body">
+                <h5 class="card-title mb-2.5 capitalize text-2xl">ticket:</h5>
+                <p class="mb-4 font-mono">Price per ticket: 100</p>
+                <div class="card-actions">
+                  <a class="btn btn_primary_color " href="#">Register</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="event_desp m-3 my-3">
+          <h2 class="text-4xl capitalize text-black font-semibold">
+            Event description
+          </h2>
+
+          <p class="text-2xl mb-3">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ut
+            dolorum aut amet modi eveniet ex omnis, rem pariatur quia facilis
+            debitis laborum aperiam delectus blanditiis ab porro consequatur a
+            sit facere suscipit voluptas, molestias explicabo. Aut molestias ab
+            libero quos inventore numquam sed, reprehenderit unde, labore enim
+            magnam neque?
+          </p>
+
+          <h2 class="text-4xl capitalize text-black font-semibold">
+            Event Organized by: <br />
+            <span class="ml-10 font-normal font-mono">k2k club</span>
+          </h2>
+        </div>
+
+        <div class="vol_table w-full overflow-x-auto">
+          <h2 class="text-2xl capitalize text-black font-semibold">
+            volunteers and organizers details:
+          </h2>
+          <div class="w-full overflow-x-auto card show">
+            <table class="table overflow-x-auto table-lg">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <!-- <th>Status</th> -->
+                  <th>Phone No</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="row-hover">
+                  <td>John Doe</td>
+                  <td>johndoe@example.com</td>
+                  <!-- <td><span class="badge badge-soft badge-success text-xs">Professional</span></td> -->
+                  <td>0113546789</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  {% endblock %}

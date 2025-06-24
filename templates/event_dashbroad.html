@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+
+    <!-- nav bar -->
+    {% include 'includes/nav.html' %}
+
+
+    <!-- event profile  -->
+    <div class="profile w-full max-w-[1200px] mx-auto p-5 flex flex-col justify-center items-center">
+        <div
+                class="card bg-base-100 shadow-xl/30 shadow-black-800 p-3 flex justify-center items-center md:flex-row md:max-w-[1200px] max-w-[500px]  flex-col gap-10"
+        >
+            <div class="img">
+                <img src="logo.jpeg" class="rounded-[50%] w-[200px]" alt=""/>
+            </div>
+
+            <div class="details">
+                <h1 class="text-3xl text-orange-300 font-bold">Profile Name</h1>
+                <p class="text-black">
+                    Here you can manage your profile, view your events, and more.
+                </p>
+                <a href="#" class="edit_btn btn btn-accent btn-gradient my-3"
+                >Edit profile</a
+                >
+            </div>
+
+            <div class="main_details">
+                <h5 class="text-gray-800 text-xl mb-2">
+                    <span class="icon-[fa6-solid--location-dot] mr-2"></span>
+                    SRM main block
+                </h5>
+                <h5 class="text-gray-800 text-xl mb-2">
+                <span class="icon-[fa6-solid--clock] mr-2"></span
+                >12-06-2006,<span>6pm - 8pm</span>
+                </h5>
+                <h5 class="text-gray-800 text-xl mb-2">
+                    Entry: <span class="font-bold text-green-500 ">$100</span>
+                </h5>
+            </div>
+
+
+        </div>
+
+        <!-- sales of event -->
+        <div class="sales_details m-6 flex flex-wrap justify-center items-center gap-5">
+
+
+            <div class="card p-5 bg-base-100 shadow-xl/30 shadow-black-800 flex justify-center items-center flex-row gap-1">
+                <h1 class="text-4xl capitalize font-bold text-accent">amount of sales:</h1>
+                </h1>
+                <h2 class="text-4xl py-1 px-2 rounded-xl capitalize font-bold">1000</h2>
+            </div>
+
+            <div class="card p-5 bg-base-100 shadow-xl/30 shadow-black-800 flex justify-center items-center flex-row gap-1">
+                <h1 class="text-4xl capitalize font-bold text-error">amount of sales:</h1>
+                </h1>
+                <h2 class="text-4xl  py-1 px-2 rounded-xl capitalize font-bold">1000</h2>
+            </div>
+        </div>
+
+        <!-- event data -->
+        <div class="w-full overflow-y-auto h-100">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Table heading</th>
+                    <th>Table heading</th>
+                    <th>Table heading</th>
+                    <th>Table heading</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                </tr>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                </tr>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                </tr>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                </tr>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                </tr>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                </tr>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                </tr>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                </tr>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                    <td>Table cell</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+    <!-- end of event profile -->
+
+{% endblock %}
+
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/dataTables.min.js' %}"></script>
+<script>
+    window.addEventListener('load', () => {
+
+        const inputs = document.querySelectorAll('.dt-container thead input');
+
+        inputs.forEach((input) => {
+            input.addEventListener('keydown', function (evt) {
+                if ((evt.metaKey || evt.ctrlKey) && evt.key === 'a') this.select();
+            });
+        });
+    });
+</script>
+

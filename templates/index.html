@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block head %}
+	
+{% endblock %}
+
+{% block body %}
+
+<!-- nav bar -->
+{% include 'includes/nav.html' %}
+
+
+<!-- events -->
+<div class="events flex flex-col justify-center items-center max-md">
+
+    <div class="card m-5 p-5 sm:card-side max-w-sm sm:max-w-full">
+        <figure><img class="rounded-2xl" src="https://cdn.flyonui.com/fy-assets/components/card/image-7.png" alt="headphone" /></figure>
+        <div class="card-body ">
+            <h5 class="card-title mb-0.5">K2K mega editor event</h5>
+            
+            <p class="mb-2 max-w-[630px]">This is a wider card with supporting text below as a natural lead-in to additional content. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, laudantium.!</p>
+            <h5 class="text-gray-800"><span class="icon-[fa6-solid--location-dot] size-4 mr-2 "></span></span>SRM main block</h5>
+            <h5 class="text-gray-800"><span class="icon-[fa6-solid--clock] mr-2"></span>12-06-2006</h5>
+            <h5 class="text-gray-800">Entry: Free</h5>
+            <div class="card-actions">
+                <button class="btn btn-primary"><a href="event_details.html">Register</a></button>
+                <button class="btn  btn-gradient">View details</button>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card m-5 p-5 sm:card-side max-w-sm sm:max-w-full">
+        <figure><img class="rounded-2xl" src="https://cdn.flyonui.com/fy-assets/components/card/image-7.png" alt="headphone" /></figure>
+        <div class="card-body ">
+            <h5 class="card-title mb-0.5">K2K mega editor event</h5>
+            <p class="mb-2 max-w-[630px]">This is a wider card with supporting text below as a natural lead-in to additional content. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, laudantium.!</p>
+            <h5 class="text-gray-800"><span class="icon-[fa6-solid--location-dot] size-4 mr-2 "></span></span>SRM main block</h5>
+            <h5 class="text-gray-800"><span class="icon-[fa6-solid--clock] mr-2"></span>12-06-2006</h5>
+            <h5 class="text-gray-800">Entry: Free</h5>
+            <div class="card-actions">
+                <button class="btn btn-primary">Buy Now</button>
+                <button class="btn btn-secondary btn-soft">Add to cart</button>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+	
+{% endblock %}
