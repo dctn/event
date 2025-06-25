@@ -1,0 +1,25 @@
+{
+  "name": "campify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "npx @tailwindcss/cli -i ./tailwind.css -o ../css/output.css --watch"
+  },
+  "private": true,
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.10",
+    "datatables.net": "^2.3.2",
+    "flatpickr": "^4.6.13",
+    "flyonui": "^2.2.0",
+    "jquery": "^3.7.1"
+  },
+  "devDependencies": {
+    "@iconify-json/tabler": "^1.2.19",
+    "@iconify/json": "^2.2.350",
+    "@iconify/tailwind4": "^1.0.6",
+    "prettier": "3.5.3",
+    "tailwindcss": "^4.1.10"
+  }
+}

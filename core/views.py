@@ -5,5 +5,11 @@ def home(request):
     return render(request,'index.html')
 
 def event_details(request):
-    return render(request,"register_form.html")
+    return render(request,"event_details.html")
 
+def profile(request):
+
+    context = {
+
+    }
+    return render(request,"dashbroad.html",context)
