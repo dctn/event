@@ -6,7 +6,6 @@
 {% block body %}
 
     <!-- nav bar -->
-    {% include 'includes/nav.html' %}
 
 
     <!--  dashbroad -->
@@ -15,15 +14,15 @@
         <div class="card bg-base-100 shadow-xl/30 shadow-black-800 p-3 flex justify-center items-center md:flex-row flex-col gap-10"
         >
             <div class="img">
-                <img src="logo.jpeg" class="rounded-[50%] w-[200px]" alt=""/>
+                <img src="{{ profile.img.url }}" class="rounded-[50%] w-[200px]" alt=""/>
             </div>
 
             <div class="details">
-                <h1 class="text-3xl text-orange-300 font-bold">{{ request.user }}</h1>
+                <h1 class="text-3xl text-orange-300 font-bold">{{ profile.name }}</h1>
                 <p class="text-black">
-                    Here you can manage your profile, view your events, and more.
+                    {{ profile.bio }}
                 </p>
-                <a href="#" class="edit_btn btn btn-accent btn-gradient my-3"
+                <a href="{% url 'profile_register' %}" class="edit_btn btn btn-accent btn-gradient my-3"
                 >Edit profile</a
                 >
             </div>

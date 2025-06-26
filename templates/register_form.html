@@ -5,243 +5,298 @@
 {% endblock %}
 
 {% block body %}
-{% include 'includes/nav.html' %}
+
     <!--  forms -->
     <div
-      class="bg-base-100 my-8 max-w-[1200px] w-full mx-auto flex justify-center items-center rounded-lg shadow-base-800/20 shadow-sm"
+            class="bg-base-100 my-8 max-w-[1200px] w-full mx-auto flex justify-center items-center rounded-lg shadow-base-800/20 shadow-sm"
     >
-      <!-- <h5 class="bg-base-300/10 rounded-t-lg p-4 text-xl font-bold">
-        JS Validation
-      </h5> -->
-      <div class="w-full p-4">
-        <form class="needs-validation peer grid gap-y-4" novalidate>
-          <!-- Account Details -->
-          <div class="w-full">
-            <h6 class="text-lg font-semibold">1. Account Details</h6>
-            <hr class="mb-4 mt-2" />
-          </div>
-          <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div>
-              <label class="label-text" for="firstName">First Name </label>
-              <input
-                id="firstName"
-                type="text"
-                placeholder="John"
-                class="input"
-                required
-              />
-              <span class="error-message">Please enter your name.</span>
-              <span class="success-message">Looks good!</span>
-            </div>
-
-            <div>
-              <label class="label-text" for="lastName">Last Name</label>
-              <input
-                id="lastName"
-                type="text"
-                placeholder="Doe"
-                class="input"
-                required
-              />
-              <span class="error-message">Please enter your last name.</span>
-              <span class="success-message">Looks good!</span>
-            </div>
-          </div>
-          <!-- Email and password -->
-          <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div>
-              <label class="label-text" for="userEmail">Email</label>
-              <input
-                id="userEmail"
-                type="email"
-                class="input"
-                placeholder="john@gmail.com"
-                aria-label="john@gmail.com"
-                required=""
-              />
-              <span class="error-message">Please enter a valid email</span>
-              <span class="success-message">Looks good!</span>
-            </div>
-            <!--  phone no -->
-            <div>
-              <label class="label-text" for="phoneNo">Phone No</label>
-              <div class="input">
-                <input
-                  id="phoneNo"
-                  type="number"
-                  class="grow"
-                  placeholder="Enter Whatsapp Phone No"
-                  required
-                />
-              </div>
-              <span class="error-message">Please enter a valid password</span>
-              <span class="success-message">Looks good!</span>
-            </div>
-          </div>
-          <!-- Personal Info -->
-          <div class="w-full">
-            <h6 class="text-lg font-semibold">2. Personal Info</h6>
-            <hr class="mb-4 mt-2" />
-          </div>
-          <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <!-- file input -->
-            <!-- <div>
-              <label class="label-text" for="userProfile">Profile Pic</label>
-              <input id="userProfile" type="file" class="input" required />
-              <span class="error-message">Please select the file</span>
-              <span class="success-message">Looks good!</span>
-            </div> -->
-            <!-- date of birth -->
-            <div>
-              <label class="label-text" for="jsPickr">DOB</label>
-              <input
-                id="jsPickr"
-                type="text"
-                class="input"
-                placeholder="YYYY-MM-DD"
-                required
-              />
-              <span class="error-message">Please select your DOB</span>
-              <span class="success-message">Looks good!</span>
-            </div>
-          </div>
-          <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-
-            <!-- <div>
-              <label class="label-text" for="userCountry"
-                >Pick your Country</label
-              >
-              <select
-                class="select"
-                id="userCountry"
-                aria-label="Select Country"
-                required
-              >
-                <option value="">Select Country</option>
-                <option value="usa">USA</option>
-                <option value="uk">UK</option>
-                <option value="france">France</option>
-                <option value="australia">Australia</option>
-                <option value="spain">Spain</option>
-              </select>
-              <span class="error-message">Please select your country</span>
-              <span class="success-message">Looks good!</span>
-            </div> -->
+        <!-- <h5 class="bg-base-300/10 rounded-t-lg p-4 text-xl font-bold">
+          JS Validation
+        </h5> -->
+        <div class="w-full p-4">
+            <form class="needs-validation peer grid gap-y-4" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
 
 
-            <div>
-              <div class="label-text">Gender</div>
-              <div class="flex items-center gap-2">
-                <input
-                  type="radio"
-                  id="male"
-                  name="radio-0"
-                  class="radio radio-primary"
-                  required
-                />
-                <label class="label-text text-base" for="male">Male</label>
-              </div>
-              <div class="flex items-center gap-2">
-                <input
-                  type="radio"
-                  id="female"
-                  name="radio-0"
-                  class="radio radio-primary"
-                  required
-                />
-                <label class="label-text text-base" for="female">Female</label>
-              </div>
-              <span class="error-message">Please select your Gender</span>
-              <span class="success-message">Looks good!</span>
-            </div>
-          </div>
-          <div class="w-full">
-            <label class="label-text" for="userBio">Bio</label>
-            <textarea
-              class="textarea min-h-20 resize-none"
-              id="userBio"
-              placeholder="Hello!!!"
-              required=""
-            ></textarea>
-            <span class="error-message">Please write few words</span>
-            <span class="success-message">Looks good!</span>
-          </div>
-          <div>
-            <div class="flex items-center gap-3">
-              <input
-                type="checkbox"
-                id="userSwitch"
-                class="switch switch-primary"
-                required
-              />
-              <label class="label-text text-base" for="userSwitch"
-                >Send me related emails</label
-              >
-            </div>
-            <span class="error-message">Please select your preference</span>
-            <span class="success-message">Looks good!</span>
-          </div>
-          <div>
-            <div class="flex items-center gap-3">
-              <input
-                type="checkbox"
-                class="checkbox checkbox-primary"
-                id="userAgre"
-                required
-              />
-              <label class="label-text text-base" for="userAgre"
-                >Agree to our terms and conditions</label
-              >
-            </div>
-            <span class="error-message">Please confirm our T&C</span>
-            <span class="success-message">Looks good!</span>
-          </div>
-          <!-- Submit button -->
-          <div class="mt-4">
-            <button type="submit" name="submitButton" class="btn btn-primary" id="submitBtn" disabled>
-              Submit
-            </button>
-          </div>
-        </form>
-      </div>
+                <!-- Account Details -->
+                <div class="w-full">
+                    <h6 class="text-lg font-semibold">1. Account Details</h6>
+                    <hr class="mb-4 mt-2"/>
+                </div>
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <div>
+                        <label class="label-text" for="firstName">First Name </label>
+
+                        {#                        <input#}
+                        {#                                id="firstName"#}
+                        {#                                type="text"#}
+                        {#                                placeholder="John"#}
+                        {#                                class="input"#}
+                        {#                                required#}
+                        {#                        />#}
+
+                        {{ form.name }}
+
+                        {% if form.name.errors %}
+                            <span class="error-message"> {{ form.name.errors.0 }}</span>
+                        {% endif %}
+                        <span class="success-message">Looks good!</span>
+                    </div>
+
+                    <div>
+                        <label class="label-text" for="lastName">College Name</label>
+                        {#                        <input#}
+                        {#                                id="lastName"#}
+                        {#                                type="text"#}
+                        {#                                placeholder="SRM University"#}
+                        {#                                class="input"#}
+                        {#                                required#}
+                        {#                        />#}
+
+                        {{ form.college_name }}
+
+                        <span class="error-message">Please enter your last name.</span>
+                        <span class="success-message">Looks good!</span>
+                    </div>
+                </div>
+                <!-- Email and password -->
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <div>
+                        <label class="label-text capitalize" for="userEmail">department</label>
+
+                        {#                        <input#}
+                        {#                                id="userEmail"#}
+                        {#                                type="text"#}
+                        {#                                class="input"#}
+                        {#                                placeholder="B.SC Computer Science"#}
+                        {#                                aria-label="B.SC Computer Science"#}
+                        {#                                required=""#}
+                        {#                        />#}
+
+                        {{ form.department }}
+
+                        <span class="error-message">Please enter a valid email</span>
+                        <span class="success-message">Looks good!</span>
+                    </div>
+                    <!--  phone no -->
+                    <div>
+                        <label class="label-text" for="phoneNo">Phone No</label>
+
+                        <div class="input">
+                            {#                            <input#}
+                            {#                                    id="phoneNo"#}
+                            {#                                    type="number"#}
+                            {#                                    class="grow"#}
+                            {#                                    placeholder="Enter Whatsapp Phone No"#}
+                            {#                                    required#}
+                            {#                            />#}
+
+                            {{ form.phone_no }}
+
+                        </div>
+
+
+                        {% if form.phone_no.errors %}
+                            <span class="text-red-400">{{ form.phone_no.errors.0 }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Personal Info -->
+                <div class="w-full">
+                    <h6 class="text-lg font-semibold">2. Personal Info</h6>
+                    <hr class="mb-4 mt-2"/>
+                </div>
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <!-- file input -->
+                    <div>
+                        <label class="label-text" for="userProfile">Profile Pic</label>
+
+                        {#                        <input id="userProfile" type="file" class="input" required/>#}
+
+                        {{ form.img }}
+
+                        {% if form.img.errors %}
+                            <span class="error-message"> {{ form.img.errors }}</span>
+                        {% endif %}
+                    </div>
+
+                    <!-- date of birth -->
+                    <!-- <div>
+                      <label class="label-text" for="jsPickr">DOB</label>
+                      <input
+                        id="jsPickr"
+                        type="text"
+                        class="input"
+                        placeholder="YYYY-MM-DD"
+                        required
+                      />
+                      <span class="error-message">Please select your DOB</span>
+                      <span class="success-message">Looks good!</span>
+                    </div> -->
+                    <!-- end of birth -->
+
+                    <div>
+                        <label class="label-text" for="userCountry"
+                        >Which Events are interested ?</label
+                        >
+                        {#                           #}
+                        {#                      <select#}
+                        {#                        class="select"#}
+                        {#                        id="userCountry"#}
+                        {#                        aria-label="Select Country"#}
+                        {#                        required#}
+                        {#                      >#}
+                        {#                        <option value="">Select Country</option>#}
+                        {#                        <option value="usa">USA</option>#}
+                        {#                        <option value="uk">UK</option>#}
+                        {#                        <option value="france">France</option>#}
+                        {#                        <option value="australia">Australia</option>#}
+                        {#                        <option value="spain">Spain</option>#}
+                        {#                      </select>#}
+
+                        {{ form.interested_event }}
+
+                        <span class="error-message">Please select your country</span>
+                        <span class="success-message">Looks good!</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+
+
+                    <div>
+                        <div class="label-text">Gender</div>
+                        {% for radio in form.gender %}
+
+
+
+                            <div class="flex items-center gap-2">
+                                {#                            <input#}
+                                {#                                    type="radio"#}
+                                {#                                    id="male"#}
+                                {#                                    name="radio-0"#}
+                                {#                                    class="radio radio-primary"#}
+                                {#                                    required#}
+                                {#                            />#}
+
+                                {{ radio.tag }}
+
+                                <label class="label-text text-base" for="male">{{ radio.choice_label }}</label>
+                            </div>
+
+                        {% endfor %}
+
+                        {#                        <div class="flex items-center gap-2">#}
+                        {#                            <input#}
+                        {#                                    type="radio"#}
+                        {#                                    id="female"#}
+                        {#                                    name="radio-0"#}
+                        {#                                    class="radio radio-primary"#}
+                        {#                                    required#}
+                        {#                            />#}
+                        {#                            <label class="label-text text-base" for="female">Female</label>#}
+                        {#                            #}
+                        {#                            #}
+                        {#                        </div>#}
+
+
+                        <span class="error-message">Please select your Gender</span>
+                        <span class="success-message">Looks good!</span>
+                    </div>
+                </div>
+                <div class="w-full">
+                    <label class="label-text" for="userBio">Bio</label>
+                    {#                    <textarea#}
+                    {#                            class="textarea min-h-20 resize-none"#}
+                    {#                            id="userBio"#}
+                    {#                            placeholder="Hello!!!"#}
+                    {#                            required=""#}
+                    {#                    ></textarea>#}
+
+                    {{ form.bio }}
+
+                    <span class="error-message">Please write few words</span>
+                    <span class="success-message">Looks good!</span>
+                </div>
+
+
+                <div>
+                    <div class="flex items-center gap-3">
+                        <input
+                                type="checkbox"
+                                class="checkbox checkbox-primary"
+                                id="userAgre"
+                                required
+                        />
+                        <label class="label-text text-base" for="userAgre"
+                        >Agree to our terms and conditions</label
+                        >
+                    </div>
+                    <span class="error-message">Please confirm our T&C</span>
+                    <span class="success-message">Looks good!</span>
+                </div>
+                {# error msg               #}
+                {% if form.errors %}
+                    <div class="alert alert-error capitalize    ">
+                        <ul>
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <li>{{ field.label }}: {{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                <!-- Submit button -->
+                <div class="mt-4">
+                    <button type="submit" name="submitButton" class="btn btn-primary" id="submitBtn" disabled>
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <!-- form finished -->
 
     <script>
-      document.getElementById("userAgre").addEventListener("change", function () {
-        document.getElementById("submitBtn").disabled = !this.checked;
-      });
-
-      document.addEventListener("DOMContentLoaded", function () {
-        // Initialize flatpickr
-        flatpickr("#jsPickr", {
-          allowInput: true,
-          monthSelectorType: "static",
+        document.getElementById("userAgre").addEventListener("change", function () {
+            document.getElementById("submitBtn").disabled = !this.checked;
         });
-        // Fetch all the forms we want to apply custom validation styles to
-        // const forms = document.querySelectorAll(".needs-validation");
 
-        // Loop over them and prevent submission if invalid
+        document.addEventListener("DOMContentLoaded", function () {
+            // Initialize flatpickr
+            flatpickr("#jsPickr", {
+                allowInput: true,
+                monthSelectorType: "static",
+            });
+            // Fetch all the forms we want to apply custom validation styles to
+            // const forms = document.querySelectorAll(".needs-validation");
 
-        Array.from(forms).forEach((form) => {
-          form.addEventListener(
-            "submit",
-            (event) => {
-              if (!form.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
-                // Find the first invalid input field and set focus to it
-                const firstInvalidElement = form.querySelector(":invalid");
-                if (firstInvalidElement) {
-                  firstInvalidElement.focus();
-                }
-              }
-              form.classList.add("validate");
-            },
-            false
-          );
+            // Loop over them and prevent submission if invalid
+
+            Array.from(forms).forEach((form) => {
+                form.addEventListener(
+                    "submit",
+                    (event) => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            // Find the first invalid input field and set focus to it
+                            const firstInvalidElement = form.querySelector(":invalid");
+                            if (firstInvalidElement) {
+                                firstInvalidElement.focus();
+                            }
+                        }
+                        form.classList.add("validate");
+                    },
+                    false
+                );
+            });
         });
-      });
     </script>
 {% endblock %}
