@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .forms import ProfileForm
+from .forms import *
 from .models import *
 # Create your views here.
 def home(request):
@@ -14,7 +14,7 @@ def profile(request):
     context = {
     'profile':user_profile,
     }
-    return render(request,"dashbroad.html",context)
+    return render(request, "profile.html", context)
 
 
 @login_required
@@ -32,3 +32,14 @@ def profile_form(request):
         "form":form
     }
     return render(request,"register_form.html",context)
+
+
+### Event view
+
+def event_registation(request):
+    form = EventForm()
+
+    context = {
+        "form":form
+    }
+    return render(request,"event_register.html",context)

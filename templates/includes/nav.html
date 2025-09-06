@@ -6,7 +6,7 @@
             <div class="navbar-start items-center justify-between max-md:w-full">
                 <a
                         class="link text-base-content link-neutral text-xl font-bold no-underline"
-                        href="#"
+                        href="{% url 'home' %}"
                 >
                     <img src="{% static 'img/logo_dot_sm.png' %}" class="md:w-[200px] w-[100px]" alt=""/>
 
@@ -39,10 +39,11 @@
                 <li><a href="#">Club</a></li>
                 <li><a href="#">Search</a></li>
                 {% if user.is_authenticated %}
-                <li><a href="{% url 'account_logout' %}" class="btn btn-soft btn-secondary">Logout</a></li>
-                    {% else %}
-                <li><a href="{% url 'account_login' %}" class="w-fit btn btn-primary btn-gradient">Login</a></li>
-                <li><a href="{% url 'account_signup' %}" class="w-fit btn btn-primary btn-gradient">Signup</a></li>
+                    <li><a href="{% url 'profile' %}" class="btn btn-primary">Profile</a></li>
+                    <li><a href="{% url 'account_logout' %}" class="btn btn-soft btn-secondary">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'account_login' %}" class="w-fit btn btn-primary btn-gradient">Login</a></li>
+                    <li><a href="{% url 'account_signup' %}" class="w-fit btn btn-primary btn-gradient">Signup</a></li>
 
                 {% endif %}
             </ul>
