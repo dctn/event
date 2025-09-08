@@ -7,182 +7,326 @@
 
 {% block body %}
 
-<!-- nav bar -->
+    <!-- nav bar -->
 
 
 
     <!-- event details -->
     <div class="event_details flex lg:items-center flex-col">
-      <!-- event images -->
-      <div class="event_imgs max-w-[1100px] mx-3 my-4">
-        <div
-          id="image"
-          data-carousel='{"loadingClasses": "opacity-0","isInfiniteLoop": true,"isAutoPlay": true, "speed": 3000 }'
-          class="relative w-full"
-        >
-          <div class="carousel">
-            <div class="carousel-body h-full opacity-0">
-              <!-- Slide 1 -->
-              <div class="carousel-slide">
-                <div class="flex h-full justify-center">
-                  <img
-                    src="https://cdn.flyonui.com/fy-assets/components/carousel/image-22.png"
-                    class="size-full object-cover"
-                    alt="game"
-                  />
-                </div>
-              </div>
-              <!-- Slide 2 -->
-              <div class="carousel-slide">
-                <div class="flex h-full justify-center">
-                  <img
-                    src="https://cdn.flyonui.com/fy-assets/components/carousel/image-15.png"
-                    class="size-full object-cover"
-                    alt="vrbox"
-                  />
-                </div>
-              </div>
-              <!-- Slide 3 -->
-              <div class="carousel-slide">
-                <div class="flex h-full justify-center">
-                  <img
-                    src="https://cdn.flyonui.com/fy-assets/components/carousel/image-16.png"
-                    class="size-full object-cover"
-                    alt="laptop"
-                  />
-                </div>
-              </div>
-              <!-- Slide 4 -->
-              <div class="carousel-slide">
-                <div class="flex h-full justify-center">
-                  <img
-                    src="https://cdn.flyonui.com/fy-assets/components/carousel/image-8.png"
-                    class="size-full object-cover"
-                    alt="VRBox"
-                  />
-                </div>
-              </div>
-              <!-- Slide 5 -->
-              <div class="carousel-slide">
-                <div class="flex h-full justify-center">
-                  <img
-                    src="https://cdn.flyonui.com/fy-assets/components/carousel/image-23.png"
-                    class="size-full object-cover"
-                    alt="iwatch"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Previous Slide -->
-          <button
-            type="button"
-            class="carousel-prev start-5 max-sm:start-3 carousel-disabled:opacity-50 size-9.5 bg-base-100 flex items-center justify-center rounded-full shadow-base-300/20 shadow-sm"
-          >
+        <!-- event images -->
+        <div class="event_imgs max-w-[1100px] mx-3 my-4 max-h-fit">
+            <div
+                    id="image"
+                    data-carousel='{"loadingClasses": "opacity-0","isInfiniteLoop": true,"isAutoPlay": true, "speed": 3000 }'
+                    class="relative w-full"
+            >
+                <div class="carousel">
+                    <div class="carousel-body h-full opacity-0">
+                        <!-- Slide 1 -->
+                        <div class="carousel-slide">
+                            <div class="flex h-full justify-center">
+                                <img
+                                        src="{{ event.img.url }}"
+                                        class="size-full object-cover"
+                                        alt="game"
+                                />
+                            </div>
+                        </div>
+
+                        {% if event.img_2 %}
+                            <!-- Slide 2 -->
+                            <div class="carousel-slide">
+                                <div class="flex h-full justify-center">
+                                    <img
+                                            src="{{ event.img_2.url }}"
+                                            class="size-full object-cover"
+                                            alt="vrbox"
+                                    />
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {% if event.img_3 %}
+                            <!-- Slide 3 -->
+                            <div class="carousel-slide">
+                                <div class="flex h-full justify-center">
+                                    <img
+                                            src="{{ event.img_3.url }}"
+                                            class="size-full object-cover"
+                                            alt="laptop"
+                                    />
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {% if event.img_4 %}
+                            <!-- Slide 4 -->
+                            <div class="carousel-slide">
+                                <div class="flex h-full justify-center">
+                                    <img
+                                            src="{{ event.img_4.url }}"
+                                            class="size-full object-cover"
+                                            alt="VRBox"
+                                    />
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {#            #}
+                        {#              <!-- Slide 5 -->#}
+                        {#              <div class="carousel-slide">#}
+                        {#                <div class="flex h-full justify-center">#}
+                        {#                  <img#}
+                        {#                    src="https://cdn.flyonui.com/fy-assets/components/carousel/image-23.png"#}
+                        {#                    class="size-full object-cover"#}
+                        {#                    alt="iwatch"#}
+                        {#                  />#}
+                        {#                </div>#}
+                        {#              </div>#}
+                        {#            </div>#}
+                        {#          </div>#}
+                        <!-- Previous Slide -->
+                        <button
+                                type="button"
+                                class="carousel-prev start-5 max-sm:start-3 carousel-disabled:opacity-50 size-9.5 bg-base-100 flex items-center justify-center rounded-full shadow-base-300/20 shadow-sm"
+                        >
             <span
-              class="icon-[tabler--chevron-left] size-5 cursor-pointer"
+                    class="icon-[tabler--chevron-left] size-5 cursor-pointer"
             ></span>
-            <span class="sr-only">Previous</span>
-          </button>
-          <!-- Next Slide -->
-          <button
-            type="button"
-            class="carousel-next end-5 max-sm:end-3 carousel-disabled:opacity-50 size-9.5 bg-base-100 flex items-center justify-center rounded-full shadow-base-300/20 shadow-sm"
-          >
-            <span class="icon-[tabler--chevron-right] size-5"></span>
-            <span class="sr-only">Next</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- event details -->
-      <div
-        class="event_content p-6 flex flex-col items-center gap-8 justify-center max-w-[1200px]"
-      >
-      
-        <div class="details flex flex-col md:flex-row gap-5">
-
-          <div class="w-full flex flex-col gap-3">
-            <h1 class="text-5xl font-mono capitalize text-black font-bold">
-              K2K culb knowledge sharing event
-            </h1>
-
-            <div class="main_details">
-              <h5 class="text-gray-800 text-xl mb-2">
-                <span class="icon-[fa6-solid--location-dot] mr-2"></span>
-                SRM main block
-              </h5>
-              <h5 class="text-gray-800 text-xl mb-2">
-                <span class="icon-[fa6-solid--clock] mr-2"></span
-                >12-06-2006,<span>6pm - 8pm</span>
-              </h5>
-              <h5 class="text-gray-800 text-xl mb-2">
-                Entry: <span class="font-bold text-green-500 ">$100</span>
-              </h5>
-            </div>
-
-          </div>
-
-          <div class="md:w-3/5 ticket_price w-full">
-            <div class="card sm:max-w-sm shadow-2xl">
-              <div class="card-body">
-                <h5 class="card-title mb-2.5 capitalize text-2xl">ticket:</h5>
-                <p class="mb-4 font-mono">Price per ticket: 100</p>
-                <div class="card-actions">
-                  <a class="btn btn_primary_color " href="#">Register</a>
+                            <span class="sr-only">Previous</span>
+                        </button>
+                        <!-- Next Slide -->
+                        <button
+                                type="button"
+                                class="carousel-next end-5 max-sm:end-3 carousel-disabled:opacity-50 size-9.5 bg-base-100 flex items-center justify-center rounded-full shadow-base-300/20 shadow-sm"
+                        >
+                            <span class="icon-[tabler--chevron-right] size-5"></span>
+                            <span class="sr-only">Next</span>
+                        </button>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
 
-        </div>
+                <!-- event details -->
+                <div
+                        class="event_content p-6 flex flex-col items-center gap-8 justify-center max-w-[1200px]"
+                >
 
-        <div class="event_desp m-3 my-3">
-          <h2 class="text-4xl capitalize text-black font-semibold">
-            Event description
-          </h2>
+                    <div class="details flex flex-col md:flex-row gap-5">
 
-          <p class="text-2xl mb-3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ut
-            dolorum aut amet modi eveniet ex omnis, rem pariatur quia facilis
-            debitis laborum aperiam delectus blanditiis ab porro consequatur a
-            sit facere suscipit voluptas, molestias explicabo. Aut molestias ab
-            libero quos inventore numquam sed, reprehenderit unde, labore enim
-            magnam neque?
-          </p>
+                        <div class="w-full flex flex-col gap-3">
+                            <h1 class="text-5xl font-mono capitalize text-black font-bold">
+                                {{ event.name }}
+                            </h1>
 
-          <h2 class="text-4xl capitalize text-black font-semibold">
-            Event Organized by: <br />
-            <span class="ml-10 font-normal font-mono">k2k club</span>
-          </h2>
-        </div>
 
-        <div class="vol_table w-full overflow-x-auto">
-          <h2 class="text-2xl capitalize text-black font-semibold">
-            volunteers and organizers details:
-          </h2>
-          <div class="w-full overflow-x-auto card show">
-            <table class="table overflow-x-auto table-lg">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <!-- <th>Status</th> -->
-                  <th>Phone No</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="row-hover">
-                  <td>John Doe</td>
-                  <td>johndoe@example.com</td>
-                  <!-- <td><span class="badge badge-soft badge-success text-xs">Professional</span></td> -->
-                  <td>0113546789</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+                            <div class="main_details">
+                                <h5 class="text-gray-800 text-xl mb-2">
+                                    <span class="icon-[fa6-solid--location-dot] mr-2"></span>
+                                    {{ event.location }}
+                                </h5>
 
-      </div>
-    </div>
-  {% endblock %}
+                                <h5 class="text-gray-800 text-xl mb-2">
+                <span class="icon-[fa6-solid--clock] mr-2"></span
+                >{{ event.registion_on_date }},<span>{{ event.event_starting_time }}</span>
+                                </h5>
+
+                                <h5 class="text-gray-800 text-xl mb-2">
+                                    {% if event.event_type == "free" %}
+                                        Entry: <span class="font-bold text-green-500 ">Free</span>
+                                    {% else %}
+                                        Entry: <span class="font-bold text-green-500 ">Paid</span>
+
+                                    {% endif %}
+                                </h5>
+                            </div>
+
+                        </div>
+
+                        <div class="md:w-3/5 ticket_price w-full">
+                            <div class="card sm:max-w-sm shadow-2xl">
+                                <div class="card-body">
+
+
+                                    {% if event.event_type == "paid" %}
+                                        <h5 class="card-title mb-2.5 capitalize text-2xl">ticket:</h5>
+                                        <p class="mb-4 font-mono">Price per ticket: {{ event.amount }}</p>
+                                        <div class="card-actions">
+                                        {% if is_already_registered %}
+                                            <p class="mb-4 font-mono">You already register this event</p>
+                                        {% else %}
+                                            <button id="openCheckoutModal"
+                                                    class="btn btn-primary px-4 py-2 rounded bg-purple-600 text-white">
+                                                Register
+                                            </button>
+
+                                        {% endif %}
+                                    {% else %}
+                                        <h5 class="card-title mb-2.5 capitalize text-2xl">ticket:</h5>
+                                        <p class="mb-4 font-mono">Price per ticket: Free</p>
+                                        <div class="card-actions">
+                                        {% if is_already_registered %}
+                                            <p class="mb-4 font-mono">You already register this event</p>
+                                            <a class="btn btn_primary_color "
+                                               href="{% url 'register_free_event' event.event_id 'un_register' %}">UnRegister
+                                            </a>
+                                        {% else %}
+                                            <a class="btn btn_primary_color "
+                                               href="{% url 'register_free_event' event.event_id 'register' %}">Register
+                                            </a>
+                                        {% endif %}
+
+                                    {% endif %}
+
+                                    {% if is_owner %}
+                                        <a href="{% url 'event_update' event.event_id %}"
+                                           class="btn btn-primary">Update</a>
+                                    {% endif %}
+                                    </div>
+
+
+                                    <!-- Modal Overlay -->
+                                    <div id="checkoutModal"
+                                         class="fixed inset-0 bg-black/70 flex items-center justify-center hidden z-50">
+                                        <!-- Modal Content -->
+                                        <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative">
+                                            <!-- Close Button -->
+                                            <button id="closeCheckoutModal"
+                                                    class="absolute top-99 right-9 text-gray-700 hover:text-gray-900 text-2xl font-bold m-2">
+                                                &times;
+                                            </button>
+                                            <!-- Modal Title -->
+                                            <h2 class="text-lg font-bold mb-4">Checkout Details</h2>
+                                            <!-- Checkout Details -->
+                                            <div>
+                                                <p><strong>Product Amount:</strong> ₹{{ event.amount }}</p>
+                                                <p><strong>Platform Fee (15%):</strong> ₹{{ platform }}</p>
+                                                <p><strong>Razorpay Fee (3% + GST):</strong> ₹{{ razorpay_fee_rate }}</p>
+                                                <hr class="my-4">
+                                                <p class="text-lg font-semibold">Total Amount to Pay: ₹{{ total_charge }}</p>
+                                            </div>
+                                            <!-- Confirm Payment Button -->
+                                            <div class="mt-6 text-right">
+                                                <button class="btn btn_primary_color " href="#" id="rzp-button1">
+                                                    Checkout
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="event_desp m-3 my-3">
+                            <h2 class="text-4xl capitalize text-black font-semibold">
+                                Event description
+                            </h2>
+
+                            <p class="text-2xl mb-3">
+                                {{ event.event_details|linebreaksbr }}
+                            </p>
+
+                            <h2 class="text-4xl capitalize text-black font-semibold">
+                                Event Organized by: <br/>
+                                <span class="ml-10 font-normal font-mono capitalize bg-warning text-warning-content font-extrabold p-1">{{ event.club_name }}</span>
+                            </h2>
+                        </div>
+
+                        <div class="vol_table w-full overflow-x-auto">
+                            <h2 class="text-2xl capitalize text-black font-semibold">
+                                volunteers and organizers details:
+                            </h2>
+                            <div class="w-full overflow-x-auto card show">
+                                <table class="table overflow-x-auto table-lg">
+                                    <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Position</th>
+                                        <!-- <th>Status</th> -->
+                                        <th>Phone No</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="row-hover">
+                                        <td>{{ event.volunteer_name }}</td>
+                                        <td>{{ event.volunteer_position }}</td>
+                                        <!-- <td><span class="badge badge-soft badge-success text-xs">Professional</span></td> -->
+                                        <td>{{ event.volunteer_phone_no }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+                <script>
+                    document.getElementById("rzp-button1").addEventListener("click", async function (e) {
+                        e.preventDefault();
+
+                        let response = await fetch("{% url 'proccess_order' event.event_id %}", {
+                            method: "POST",
+                            headers: {
+                                "X-CSRFToken": "{{ csrf_token }}", // Only if CSRF is required
+                                "Content-Type": "application/json"
+                            }
+                        });
+
+                        let data = await response.json();
+
+                        var options = {
+                            "key": data.RAZORPAY_KEY_ID,
+                            "amount": data.amount,
+                            "currency": "INR",
+                            "name": "Elben creatives",
+                            "description": "Transaction",
+                            "image": "https://example.com/your_logo",
+                            "order_id": data.order_id,
+                            "callback_url": data.callback_url,
+                            "notes": {
+                                "address": "Razorpay Corporate Office"
+                            },
+                            "theme": {
+                                "color": "#3399cc"
+                            }
+                        };
+
+                        var rzp1 = new Razorpay(options);
+
+                        rzp1.on('payment.failed', function (response) {
+                            alert("Payment failed: " + response.error.description);
+                        });
+
+                        rzp1.open();
+                    });
+                </script>
+
+                <script>
+                    const openBtn = document.getElementById('openCheckoutModal');
+                    const closeBtn = document.getElementById('closeCheckoutModal');
+                    const modal = document.getElementById('checkoutModal');
+
+                    openBtn.addEventListener('click', () => {
+                        modal.classList.remove('hidden');
+                    });
+
+                    closeBtn.addEventListener('click', () => {
+                        modal.classList.add('hidden');
+                    });
+
+                    modal.addEventListener('click', (e) => {
+                        if (e.target === modal) {
+                            modal.classList.add('hidden');
+                        }
+                    });
+                </script>
+
+{% endblock %}

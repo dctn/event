@@ -19,7 +19,8 @@
         Event Registration Form
       </h5>
       <div class="w-full p-4">
-        <form class="needs-validation peer grid gap-y-4" novalidate>
+        <form class="needs-validation peer grid gap-y-4" novalidate method="post" enctype="multipart/form-data">
+        {% csrf_token %}
           <!-- Account Details -->
           <div class="w-full">
             <h6 class="text-lg font-semibold">1. Account Details</h6>
@@ -121,6 +122,8 @@
 
 
           <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+
+
             <div>
               <label class="label-text capitalize" for="firstName"
                 >organizers person Name
@@ -251,7 +254,10 @@
           </div>
 
           <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+
+
             <div>
+
               <div class="label-text">Event Type</div>
                {% for radio in form.event_type %}
               <div class="flex items-center gap-2">
@@ -267,6 +273,20 @@
               <span class="error-message">Please select your Gender</span>
               <span class="success-message">Looks good!</span>
             </div>
+
+             <div>
+              <label class="label-text capitalize" for="firstName"
+                >Enter price per Ticket
+                  <span class="capitalize bg-warning text-warning-content font-extrabold p-0.5">(if it is free event then enter 0)
+                      </span>
+              </label>
+
+                {{ form.amount }}
+
+              <span class="error-message">Please enter your name.</span>
+              <span class="success-message">Looks good!</span>
+            </div>
+
           </div>
 
           <div class="w-full">
@@ -274,12 +294,7 @@
               >Enter Details about event:</label
             >
 
-            <textarea
-              class="textarea min-h-20 resize-none"
-              id="userBio"
-              placeholder="this is a great event, you can join us"
-              required=""
-            ></textarea>
+              {{ form.event_details }}
 
             <span class="error-message">Please write few words</span>
             <span class="success-message">Looks good!</span>

@@ -40,6 +40,7 @@
                 <li><a href="#">Search</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'profile' %}" class="btn btn-primary">Profile</a></li>
+                    <li><a href="{% url 'event_registation' %}" class="btn btn-gradient">Create your Event</a></li>
                     <li><a href="{% url 'account_logout' %}" class="btn btn-soft btn-secondary">Logout</a></li>
                 {% else %}
                     <li><a href="{% url 'account_login' %}" class="w-fit btn btn-primary btn-gradient">Login</a></li>

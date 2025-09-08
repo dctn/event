@@ -5,17 +5,32 @@
     <meta charset="UTF-8">
     <title>Campify</title>
     <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
 
     {% block head %}
-    	
+
     {% endblock %}
 </head>
 <body data-theme="light">
 
 {% include 'includes/nav.html' %}
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div
+                    class="p-2 rounded own_message">
+                <h3 class="message_text capitalize">
+                    {{ message }}
+                </h3>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
 
 {% block body %}
-	
+
 {% endblock %}
 
 
@@ -24,33 +39,33 @@
 <!-- footer -->
 
 <footer class="footer bg-base-200/60 flex flex-col items-center gap-4 p-6">
-  <div class="flex items-center gap-2 text-xl font-bold text-base-content">
-  <img src="{% static 'img/logo_dot_sm.png' %}" class="w-16" alt="">
-    <span></span>
-  </div>
-  <aside>
-    <p>©2025 <span class="font-medium">campify.tech</span></p>
-  </aside>
-  <nav class="grid-flow-col gap-4">
-    <a class="link link-hover text-base-content" href="#">License</a>
-    <a class="link link-hover text-base-content" href="#">Help</a>
-    <a class="link link-hover text-base-content" href="#">Contact</a>
-    <a class="link link-hover text-base-content" href="#">Policy</a>
-  </nav>
-  <div class="flex h-5 gap-4">
-    <a href="#" class="link text-base-content" aria-label="Github Link">
-      <span class="icon-[tabler--brand-github-filled] size-5"></span>
-    </a>
-    <a href="#" class="link text-base-content" aria-label="Facebook Link">
-      <span class="icon-[tabler--brand-facebook-filled] size-5"></span>
-    </a>
-    <a href="#" class="link text-base-content" aria-label="X Link">
-      <span class="icon-[tabler--brand-x-filled] size-5"></span>
-    </a>
-    <a href="#" class="link text-base-content" aria-label="Google Link">
-      <span class="icon-[tabler--brand-google-filled] size-5"></span>
-    </a>
-  </div>
+    <div class="flex items-center gap-2 text-xl font-bold text-base-content">
+        <img src="{% static 'img/logo_dot_sm.png' %}" class="w-16" alt="">
+        <span></span>
+    </div>
+    <aside>
+        <p>©2025 <span class="font-medium">campify.tech</span></p>
+    </aside>
+    <nav class="grid-flow-col gap-4">
+        <a class="link link-hover text-base-content" href="#">License</a>
+        <a class="link link-hover text-base-content" href="#">Help</a>
+        <a class="link link-hover text-base-content" href="#">Contact</a>
+        <a class="link link-hover text-base-content" href="#">Policy</a>
+    </nav>
+    <div class="flex h-5 gap-4">
+        <a href="#" class="link text-base-content" aria-label="Github Link">
+            <span class="icon-[tabler--brand-github-filled] size-5"></span>
+        </a>
+        <a href="#" class="link text-base-content" aria-label="Facebook Link">
+            <span class="icon-[tabler--brand-facebook-filled] size-5"></span>
+        </a>
+        <a href="#" class="link text-base-content" aria-label="X Link">
+            <span class="icon-[tabler--brand-x-filled] size-5"></span>
+        </a>
+        <a href="#" class="link text-base-content" aria-label="Google Link">
+            <span class="icon-[tabler--brand-google-filled] size-5"></span>
+        </a>
+    </div>
 </footer>
 
 <script src="{% static 'js/jquery.min.js' %}"></script>
@@ -58,5 +73,7 @@
 <script src="{% static 'js/flatpickr.js' %}"></script>
 
 <script src="{% static 'js/flyonui.js' %}"></script>
+<script src="{% static 'js/accordion.js' %}"></script>
+
 </body>
 </html>

@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
+    'payment.apps.PaymentConfig',
 
     'allauth',
     'allauth.account',
@@ -165,8 +169,20 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 ACCOUNT_SIGNUP_REDIRECT_URL = "profile_register"
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'profile_register'
 LOGOUT_REDIRECT_URL = '/'
 
 SOCIALACCOUNT_LOGIN_ON_GET = True
 ACCOUNT_LOGOUT_ON_GET = True
+
+RAZORPAY_KEY_ID = os.getenv("RAZORPAY_KEY_ID")
+if not RAZORPAY_KEY_ID:
+    raise Exception("Missing razorpay_key_id environment variable")
+
+RAZORPAY_KEY_SECRET = os.getenv("RAZORPAY_KEY_SECRET")
+if not RAZORPAY_KEY_SECRET:
+    raise Exception("Missing razorpay_key_secret environment variable")
+
+RAZOR_PAY_CALLBACK_URL = "payment_verify"
+
+PLATFORM_FEE = os.environ.get("PLATFORM_FEE")

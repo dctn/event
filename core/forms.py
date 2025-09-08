@@ -64,10 +64,14 @@ class ProfileForm(forms.ModelForm):
 
 
 class EventForm(forms.ModelForm):
+    event_starting_time = forms.TimeField(
+        widget=forms.TimeInput(attrs={"class": "input", "type": "time"}),
+        input_formats=['%H:%M', '%H:%M:%S'],
+    )
     class Meta:
         model = Event
         fields = "__all__"
-        exclude = ["event_id"]
+        exclude = ["event_id","is_verified","created_by","current_slots"]
 
         widgets = {
             "name": forms.TextInput(attrs={"class":"input","placeholder":"John"}),
@@ -98,12 +102,13 @@ class EventForm(forms.ModelForm):
             "registion_closing_date": forms.DateInput(
                 attrs={"class": "input", "placeholder": "YYYY-MM-DD", "id": "jsPickr"}),
             "event_starting_time": forms.TimeInput(
-                attrs={"class": "input", "placeholder": "HH-MM", "id": "jsPickr"}),
+                attrs={"class": "input", "placeholder": "HH-MM", "id": "time-picker","type":"time"}),
             "registion_on_date":forms.DateInput(
                 attrs={"class": "input", "placeholder": "YYYY-MM-DD", "id": "jsPickr"}),
 
             "event_type": forms.RadioSelect(attrs={"class":"radio radio-primary",}),
 
-            "event_details":forms.Textarea(attrs={"class":"textarea min-h-20 resize-none","id":"userBio","placeholder":"enter details about your event"})
+            "event_details":forms.Textarea(attrs={"class":"textarea min-h-20 resize-none","id":"userBio","placeholder":"enter details about your event"}),
+            "amount": forms.TextInput(attrs={"class": "input", "placeholder": "Enter price per ticket"}),
 
         }

@@ -51,7 +51,7 @@
         <hr class="my-10 border-1 border-black rounded-xl"/>
 
         <!-- user event  -->
-
+        {% for booking in all_booking %}
         <div class="profile_events flex flex-col justify-center items-center">
             <h1 class="text-2xl  font-bold my-5">
                 Registered Events
@@ -59,50 +59,51 @@
             <div class="card sm:card-side max-w-sm sm:max-w-full ring-gray-500 rounded-2xl ring-2">
                 <figure>
                     <img
-                            src="https://cdn.flyonui.com/fy-assets/components/card/image-7.png"
+                            src="{{ booking.event.img.url }}"
                             alt="headphone"
+                            class="rounded-2xl event_img"
                     />
                 </figure>
                 <div class="card-body ">
-                    <h5 class="card-title mb-0.5">Airpods Max</h5>
+                    <h5 class="card-title mb-0.5">{{ booking.event.name }}</h5>
                     <p class="mb-2">
-                        This is a wider card with supporting text below as a natural
-                        lead-in to additional content.
+                        {{ booking.event.event_details }}
                     </p>
                     <div class="card-actions">
-                        <button class="btn btn-primary">Buy Now</button>
-                        <button class="btn btn-secondary btn-soft">Add to cart</button>
+                        <a class="btn btn-primary" href="{% url 'event_details' booking.event.event_id %}">view details</a>
+                        <button class="btn btn-secondary">Add to cart</button>
                     </div>
                 </div>
             </div>
         </div>
+        {% endfor %}
 
         <!-- club events  -->
 
-        <div class="profile_events flex flex-col justify-center items-center">
-            <h1 class="text-2xl  font-bold my-5">
-                All Events
-            </h1>
-            <div class="card sm:card-side max-w-sm sm:max-w-full ring-gray-500 rounded-2xl ring-2">
-                <figure>
-                    <img
-                            src="https://cdn.flyonui.com/fy-assets/components/card/image-7.png"
-                            alt="headphone"
-                    />
-                </figure>
-                <div class="card-body ">
-                    <h5 class="card-title mb-0.5">Airpods Max</h5>
-                    <p class="mb-2">
-                        This is a wider card with supporting text below as a natural
-                        lead-in to additional content.
-                    </p>
-                    <div class="card-actions">
-                        <button class="btn btn-primary">Buy Now</button>
-                        <button class="btn btn-secondary btn-soft">Add to cart</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+{#        <div class="profile_events flex flex-col justify-center items-center">#}
+{#            <h1 class="text-2xl  font-bold my-5">#}
+{#                All Events#}
+{#            </h1>#}
+{#            <div class="card sm:card-side max-w-sm sm:max-w-full ring-gray-500 rounded-2xl ring-2">#}
+{#                <figure>#}
+{#                    <img#}
+{#                            src="https://cdn.flyonui.com/fy-assets/components/card/image-7.png"#}
+{#                            alt="headphone"#}
+{#                    />#}
+{#                </figure>#}
+{#                <div class="card-body ">#}
+{#                    <h5 class="card-title mb-0.5">Airpods Max</h5>#}
+{#                    <p class="mb-2">#}
+{#                        This is a wider card with supporting text below as a natural#}
+{#                        lead-in to additional content.#}
+{#                    </p>#}
+{#                    <div class="card-actions">#}
+{#                        <button class="btn btn-primary">Buy Now</button>#}
+{#                        <button class="btn btn-secondary btn-soft">Add to cart</button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
 
         <!-- dashbroad end -->
     </div>

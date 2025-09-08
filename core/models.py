@@ -43,13 +43,17 @@ class EventTypeChoice(models.TextChoices):
 
 
 class Event(models.Model):
-    event_id = models.UUIDField(default=uuid.uuid4,primary_key=True)
+    event_id = models.UUIDField(default=uuid.uuid4,primary_key=True,editable=False)
+    created_by = models.ForeignKey(Profile,on_delete=models.CASCADE,)
     name = models.CharField(max_length=255)
     location = models.CharField(max_length=255)
     phone_no = models.CharField(max_length=10,validators=[phone_validator])
     password= models.CharField(max_length=255)
     club_name = models.CharField(max_length=255)
+
     no_of_slots = models.IntegerField()
+    current_slots = models.IntegerField()
+
     event_details = models.TextField()
 
     # event Images
@@ -74,6 +78,9 @@ class Event(models.Model):
     # event Type
     event_type = models.CharField(choices=EventTypeChoice.choices,blank=False,null=False,default=EventTypeChoice.PAID)
 
+    amount = models.IntegerField(default=0)
+
+    is_verified = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.name}"

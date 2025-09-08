@@ -1,0 +1,17 @@
+.event_img {
+    width: 20rem;
+    height: 10rem;
+}
+
+.messages{
+    background-color: orange;
+    text-align: center;
+    margin: 1rem;
+    border-radius: 20px;
+}
+.message_text{
+    color: white;
+    font-weight: bold;
+    font-size: 2rem;
+
+}
