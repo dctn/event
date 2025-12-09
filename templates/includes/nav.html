@@ -1,54 +1,214 @@
 {% load static %}
 
-<nav class="navbar rounded-box shadow-base-300/20 shadow-sm">
-    <div class="w-full md:flex md:items-center md:gap-2 justify-center mx-3">
-        <div class="flex items-center justify-end">
-            <div class="navbar-start items-center justify-between max-md:w-full">
-                <a
-                        class="link text-base-content link-neutral text-xl font-bold no-underline"
-                        href="{% url 'home' %}"
-                >
-                    <img src="{% static 'img/logo_dot_sm.png' %}" class="md:w-[200px] w-[100px]" alt=""/>
+<style>
+/* ----------------------------------------------------
+   NAVBAR BASE
+---------------------------------------------------- */
+.main-navbar {
+    width: 100%;
+    background: #ffffff;
+    padding: 12px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
 
-                    <!-- FlyonUI -->
-                </a>
-                <div class="md:hidden">
-                    <button
-                            type="button"
-                            class="collapse-toggle btn btn-outline btn-secondary btn-sm btn-square"
-                            data-collapse="#default-navbar-collapse"
-                            aria-controls="default-navbar-collapse"
-                            aria-label="Toggle navigation"
-                    >
-                <span
-                        class="icon-[tabler--menu-2] collapse-open:hidden size-4"
-                ></span>
-                        <span
-                                class="icon-[tabler--x] collapse-open:block hidden size-4"
-                        ></span>
-                    </button>
-                </div>
-            </div>
-        </div>
+/* Outer Container */
+.nav-container {
+    max-width: 1200px;
+    padding: 0 16px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
-        <div
-                id="default-navbar-collapse"
-                class="md:navbar-end collapse hidden basis-fit overflow-hidden transition-[height] duration-300 max-md:w-full"
-        >
-            <ul class="menu md:menu-horizontal gap-2 p-0 text-base max-md:mt-2">
+/* ----------------------------------------------------
+   LOGO
+---------------------------------------------------- */
+.nav-logo img {
+    width: 160px;
+    height: auto;
+}
+
+@media (max-width: 600px) {
+    .nav-logo img {
+        width: 110px;
+    }
+}
+
+/* ----------------------------------------------------
+   MENU LIST (DESKTOP)
+---------------------------------------------------- */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-menu ul {
+    display: flex;
+    list-style: none;
+    gap: 18px;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-menu ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* ----------------------------------------------------
+   BUTTON STYLES
+---------------------------------------------------- */
+.btn-primary {
+    background: #2563eb;
+    color: white !important;
+}
+
+.btn-secondary {
+    background: #f3f4f6;
+}
+
+.btn-gradient {
+    background: linear-gradient(90deg, #ff7f50, #ff4500);
+    color: white !important;
+}
+
+/* ----------------------------------------------------
+   MOBILE MENU TOGGLE (HAMBURGER)
+---------------------------------------------------- */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.nav-toggle span {
+    width: 28px;
+    height: 3px;
+    background: #333;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+
+/* Hamburger animation when menu is open */
+.nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translateY(8px);
+}
+.nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+.nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translateY(-8px);
+}
+
+/* ----------------------------------------------------
+   MOBILE RESPONSIVE
+---------------------------------------------------- */
+@media (max-width: 768px) {
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    /* Hide menu by default */
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        width: 100%;
+        background: white;
+        padding: 18px 0;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        border-radius: 0 0 15px 15px;
+        animation: dropdown 0.3s ease forwards;
+    }
+
+    /* Smooth dropdown animation */
+    @keyframes dropdown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Show menu when toggled */
+    .nav-menu.show-menu {
+        display: block;
+    }
+
+    /* Stack menu items vertically */
+    .nav-menu ul {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .nav-menu ul li {
+        width: 100%;
+    }
+
+    .nav-menu ul li a {
+        display: block;
+        width: 90%;
+        margin: auto;
+        padding: 12px 16px;
+        font-size: 17px;
+        border-radius: 10px;
+    }
+}
+</style>
+
+
+<nav class="main-navbar">
+    <div class="nav-container">
+
+        <!-- LOGO -->
+        <a href="{% url 'home' %}" class="nav-logo">
+            <img src="{% static 'img/logo_dot_sm.png' %}" alt="Logo">
+        </a>
+
+        <!-- HAMBURGER -->
+        <button class="nav-toggle" onclick="toggleNavbar()" id="navToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- MENU -->
+        <div class="nav-menu" id="navMenu">
+            <ul>
                 <li><a href="#">Club</a></li>
                 <li><a href="#">Search</a></li>
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'profile' %}" class="btn btn-primary">Profile</a></li>
-                    <li><a href="{% url 'event_registation' %}" class="btn btn-gradient">Create your Event</a></li>
-                    <li><a href="{% url 'account_logout' %}" class="btn btn-soft btn-secondary">Logout</a></li>
-                {% else %}
-                    <li><a href="{% url 'account_login' %}" class="w-fit btn btn-primary btn-gradient">Login</a></li>
-                    <li><a href="{% url 'account_signup' %}" class="w-fit btn btn-primary btn-gradient">Signup</a></li>
 
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'profile' %}" class="btn-primary">Profile</a></li>
+                    <li><a href="{% url 'event_registation' %}" class="btn-gradient">Create Event</a></li>
+                    <li><a href="{% url 'account_logout' %}" class="btn-secondary">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'account_login' %}" class="btn-primary">Login</a></li>
+                    <li><a href="{% url 'account_signup' %}" class="btn-primary">Signup</a></li>
                 {% endif %}
             </ul>
-
         </div>
+
     </div>
 </nav>
+
+<script>
+function toggleNavbar() {
+    let menu = document.getElementById("navMenu");
+    let toggle = document.getElementById("navToggle");
+    menu.classList.toggle("show-menu");
+    toggle.classList.toggle("active");
+}
+</script>

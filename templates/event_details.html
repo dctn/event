@@ -121,13 +121,13 @@
 
                             <div class="main_details">
                                 <h5 class="text-gray-800 text-xl mb-2">
-                                    <span class="icon-[fa6-solid--location-dot] mr-2"></span>
+                                    <img src="{% static 'icons/clock-svgrepo-com.svg' %}" class="icon_size" alt="">
                                     {{ event.location }}
                                 </h5>
 
                                 <h5 class="text-gray-800 text-xl mb-2">
-                <span class="icon-[fa6-solid--clock] mr-2"></span
-                >{{ event.registion_on_date }},<span>{{ event.event_starting_time }}</span>
+                                    <img src="{% static 'icons/location-svgrepo-com.svg' %}" class="icon_size" alt="">
+                                    {{ event.registion_on_date }},<span>{{ event.event_starting_time }}</span>
                                 </h5>
 
                                 <h5 class="text-gray-800 text-xl mb-2">
@@ -146,7 +146,9 @@
                             <div class="card sm:max-w-sm shadow-2xl">
                                 <div class="card-body">
 
-
+                                    <a class="btn btn_primary_color "
+                                       download href="{% url 'download_img' event.event_id %}"> download poster
+                                    </a>
                                     {% if event.event_type == "paid" %}
                                         <h5 class="card-title mb-2.5 capitalize text-2xl">ticket:</h5>
                                         <p class="mb-4 font-mono">Price per ticket: {{ event.amount }}</p>
@@ -180,6 +182,8 @@
                                     {% if is_owner %}
                                         <a href="{% url 'event_update' event.event_id %}"
                                            class="btn btn-primary">Update</a>
+                                        <a href="{% url 'qr_scan' event.event_id %}" class="btn btn-gradient">Qr code</a>
+
                                     {% endif %}
                                     </div>
 
@@ -199,10 +203,12 @@
                                             <!-- Checkout Details -->
                                             <div>
                                                 <p><strong>Product Amount:</strong> ₹{{ event.amount }}</p>
-                                                <p><strong>Platform Fee (15%):</strong> ₹{{ platform }}</p>
-                                                <p><strong>Razorpay Fee (3% + GST):</strong> ₹{{ razorpay_fee_rate }}</p>
+                                                <p><strong>Platform Fee (10%):</strong> ₹{{ platform }}</p>
+                                                <p><strong>Razorpay Fee (3% + GST):</strong> ₹{{ razorpay_fee_rate }}
+                                                </p>
                                                 <hr class="my-4">
-                                                <p class="text-lg font-semibold">Total Amount to Pay: ₹{{ total_charge }}</p>
+                                                <p class="text-lg font-semibold">Total Amount to Pay:
+                                                    ₹{{ total_charge }}</p>
                                             </div>
                                             <!-- Confirm Payment Button -->
                                             <div class="mt-6 text-right">
@@ -286,13 +292,13 @@
                             "key": data.RAZORPAY_KEY_ID,
                             "amount": data.amount,
                             "currency": "INR",
-                            "name": "Elben creatives",
+                            "name": "Campify",
                             "description": "Transaction",
                             "image": "https://example.com/your_logo",
                             "order_id": data.order_id,
                             "callback_url": data.callback_url,
                             "notes": {
-                                "address": "Razorpay Corporate Office"
+                                "address": "Campify Events"
                             },
                             "theme": {
                                 "color": "#3399cc"

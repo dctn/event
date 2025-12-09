@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="min-h-screen bg-gray-100 flex flex-col items-center p-4">
+
+    <div class="card bg-base-100 shadow-xl rounded-2xl w-full max-w-xl p-6">
+
+        <!-- Title -->
+        <div class="text-center mb-5">
+            <h1 class="text-3xl font-bold text-gray-900">QR Scanner</h1>
+            <p class="text-gray-600">Scan tickets to check-in attendees.</p>
+        </div>
+
+        <!-- Scanner -->
+        <div id="reader" class="w-full rounded-xl overflow-hidden shadow-lg"></div>
+
+        <!-- Loading -->
+        <p id="loadingMsg" class="text-gray-500 text-center mt-3">
+            Initializing camera...
+        </p>
+
+        <!-- Result Box -->
+        <div id="resultBox" class="hidden mt-5">
+            <div id="resultCard" class="alert text-lg font-semibold p-4"></div>
+        </div>
+
+        <!-- Scan Again -->
+        <button id="scanAgainBtn"
+                class="btn btn-outline w-full mt-4 hidden"
+                onclick="resumeScanner()">
+            Scan Next Ticket
+        </button>
+
+    </div>
+
+</div>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<script>
+    const reader = new Html5Qrcode("reader");
+    let isScanning = false;
+
+    async function startScanner() {
+        console.log("Starting scanner...");
+
+        document.getElementById("loadingMsg").classList.remove("hidden");
+
+        const devices = await Html5Qrcode.getCameras();
+        console.log("Cameras:", devices);
+
+        if (!devices || devices.length === 0) {
+            document.getElementById("loadingMsg").innerText = "No camera found.";
+            return;
+        }
+
+        const cameraId = devices[0].id;
+
+        await reader.start(
+            cameraId,
+            { fps: 10, qrbox: 250 },
+            (decodedText) => handleScan(decodedText),
+            (error) => console.log("Scan error:", error)
+        );
+
+        isScanning = true;
+        document.getElementById("loadingMsg").classList.add("hidden");
+    }
+
+    function stopScanner() {
+        if (isScanning) {
+            console.log("Stopping scanner...");
+            reader.stop();
+            isScanning = false;
+        }
+    }
+
+    function resumeScanner() {
+        console.log("Resuming scanner...");
+        document.getElementById("resultBox").classList.add("hidden");
+        document.getElementById("scanAgainBtn").classList.add("hidden");
+        startScanner();
+    }
+
+    async function handleScan(decodedText) {
+        stopScanner();
+
+        console.log("📌 SCANNED QR CONTENT:", decodedText);
+
+        // Validate URL format
+        try {
+            new URL(decodedText);
+        } catch (e) {
+            console.error("❌ Invalid URL in QR:", decodedText);
+            showResult("alert alert-error", "❌ QR contains invalid URL!");
+            return;
+        }
+
+        // Fetch backend response
+        console.log("📡 Sending request to:", decodedText);
+
+        try {
+            const response = await fetch(decodedText, {
+                method: "GET",
+                headers: {
+                    "Accept": "text/plain"
+                }
+            });
+
+            console.log("🔎 Response Status:", response.status);
+
+            const html = await response.text();
+            console.log("📥 SERVER RESPONSE:", html);
+
+            // Handle result
+            if (html.includes("CHECKIN_SUCCESS")) {
+                showResult("alert alert-success", "✅ Ticket Check-In Successful!");
+            } else if (html.includes("ALREADY_CHECKED_IN")) {
+                showResult("alert alert-warning", "⚠️ Ticket Already Checked-In!");
+            } else if (html.includes("INVALID_TICKET")) {
+                showResult("alert alert-error", "❌ Invalid Ticket!");
+            } else {
+                showResult("alert alert-error", "❌ Unknown response: " + html);
+            }
+
+        } catch (err) {
+            console.error("❌ FETCH ERROR:", err);
+
+            showResult(
+                "alert alert-error",
+                "❌ Fetch failed! Check console for details."
+            );
+        }
+
+        document.getElementById("scanAgainBtn").classList.remove("hidden");
+    }
+
+    function showResult(cssClass, message) {
+        const box = document.getElementById("resultBox");
+        const card = document.getElementById("resultCard");
+
+        box.classList.remove("hidden");
+        card.className = cssClass;
+        card.innerHTML = message;
+    }
+
+    startScanner();
+</script>
+
+
+{% endblock %}

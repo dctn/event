@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.files.base import ContentFile
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 import razorpay
@@ -10,6 +11,8 @@ from django.contrib import messages
 from core.models import Event, Profile
 from .models import Booking
 
+from check_in.views import *
+
 def calculate_total_charge(product_price, platform_fee_pct, razorpay_fee_pct, gst_pct):
     pre_fee = product_price * (1 + platform_fee_pct)
     razorpay_fee_rate = razorpay_fee_pct * (1 + gst_pct)
@@ -20,6 +23,7 @@ def calculate_total_charge(product_price, platform_fee_pct, razorpay_fee_pct, gs
 
 
 # Create your views here.
+
 @login_required
 def proccess_order(request,event_id):
 
@@ -29,7 +33,7 @@ def proccess_order(request,event_id):
     profile = get_object_or_404(Profile,user=request.user)
 
     total_amount = calculate_total_charge(product_price=int(event.amount),
-                                          platform_fee_pct=float(settings.PLATFORM_FEE),
+                                          platform_fee_pct=float(event.commission),
                                           razorpay_fee_pct=0.03,
                                           gst_pct=0.18)
     data = {
@@ -83,7 +87,7 @@ def payment_verify(request):
 
             booking.save()
             messages.success(request,"your amount paid and ticket has booked")
-            return redirect("profile")
+            return redirect("payment_success",booking.booking_id)
 
 
 
@@ -101,9 +105,38 @@ def register_free_event(request,event_id,action):
             event=event,
             amount_paid=0,
         )
+        event.current_slots -= 1
         messages.success(request,"your ticket slot is booked")
         return redirect("profile")
     elif action == "un_register":
         Booking.objects.get(user=profile,event=event).delete()
+        event.current_slots += 1
         messages.success(request,"your ticket slot is un register")
         return redirect("event_details",event_id)
+
+def payment_success(request,booking_id):
+    profile = get_object_or_404(Profile,user=request.user)
+    try:
+        booking = get_object_or_404(Booking,booking_id=booking_id,user=profile)
+        if not booking.qr_image:
+            qr_url = request.build_absolute_uri(
+                reverse("checkin_ticket", args=[booking.qr_code_id])
+            )
+            qr_img = generate_qr_code(qr_url)
+            booking.qr_image.save(
+                f"qr_{booking.qr_code_id}",
+                ContentFile(qr_img),
+                save=True
+            )
+
+        context = {
+            "booking": booking,
+        }
+
+        return render(request,"payment_success.html",context)
+    except:
+        messages.error(request,"invalid ticket")
+        return redirect("home")
+
+
+

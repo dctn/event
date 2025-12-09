@@ -5,6 +5,7 @@ from .models import *
 from PIL import Image
 from io import BytesIO
 import sys
+
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile

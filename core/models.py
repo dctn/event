@@ -81,6 +81,7 @@ class Event(models.Model):
     amount = models.IntegerField(default=0)
 
     is_verified = models.BooleanField(default=False)
+    commission = models.DecimalField(max_digits=10,decimal_places=3,default=0.10)
 
     def __str__(self):
         return f"{self.name}"

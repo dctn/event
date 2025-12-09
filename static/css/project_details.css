@@ -1,0 +1,153 @@
+
+/* ------------------ GENERAL ------------------ */
+
+.page-container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 16px;
+}
+
+/* ------------------ CAROUSEL ------------------ */
+
+.hero-carousel {
+    width: 100%;
+    height: 320px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+}
+
+@media (min-width: 768px) {
+    .hero-carousel {
+        height: 450px;
+    }
+}
+
+.carousel-slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: opacity 0.8s ease-in-out;
+    opacity: 0;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ------------------ EVENT TITLE BLOCK ------------------ */
+
+.event-title-block {
+    margin-top: 24px;
+    text-align: center;
+}
+
+.event-title-block h1 {
+    font-size: 32px;
+    font-weight: 900;
+    text-transform: capitalize;
+}
+
+@media (min-width: 768px) {
+    .event-title-block h1 {
+        font-size: 38px;
+    }
+}
+
+.event-meta {
+    color: #555;
+    margin-top: 8px;
+    font-size: 18px;
+}
+
+.icon {
+    width: 22px;
+    height: 22px;
+    margin-right: 6px;
+}
+
+/* ------------------ TICKET CARD ------------------ */
+
+.ticket-card {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+    width: 100%;
+    margin: 26px 0;
+}
+
+.ticket-card h3 {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.ticket-card p {
+    font-size: 18px;
+}
+
+/* ------------------ DESCRIPTION ------------------ */
+
+.event-description {
+    margin-top: 30px;
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+/* ------------------ MODAL ------------------ */
+
+.modal-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.modal {
+    background: #fff;
+    width: 90%;
+    max-width: 420px;
+    padding: 20px;
+    border-radius: 12px;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    right: 16px;
+    top: 10px;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+/* ------------------ BUTTONS ------------------ */
+
+.btn-primary {
+    background: #4f46e5;
+    color: white !important;
+    padding: 12px;
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.btn-outline {
+    border: 1px solid #4f46e5;
+    padding: 12px;
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+    text-align: center;
+}
+

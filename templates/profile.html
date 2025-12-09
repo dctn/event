@@ -1,110 +1,93 @@
 {% extends 'base.html' %}
-{% block head %}
-
-{% endblock %}
+{% load static %}
 
 {% block body %}
 
-    <!-- nav bar -->
+<div class="min-h-screen w-full bg-gray-100 p-4">
 
+    <!-- Profile Header Card -->
+    <div class="card bg-base-100 shadow-xl rounded-2xl max-w-5xl mx-auto p-6 flex flex-col md:flex-row gap-8 items-center">
 
-    <!--  dashbroad -->
-    <div class="profile w-full max-w-[1100px] mx-auto p-5">
-        <!-- profile card start -->
-        <div class="card bg-base-100 shadow-xl/30 shadow-black-800 p-3 flex justify-center items-center md:flex-row flex-col gap-10"
-        >
-            <div class="img">
-                <img src="{{ profile.img.url }}" class="rounded-[50%] w-[200px]" alt="" style="height: 200px"/>
-            </div>
-
-            <div class="details">
-                <h1 class="text-3xl text-orange-300 font-bold">{{ profile.name }}</h1>
-                <p class="text-black">
-                    {{ profile.bio }}
-                </p>
-                <a href="{% url 'profile_register' %}" class="edit_btn btn btn-accent btn-gradient my-3"
-                >Edit profile</a
-                >
-            </div>
-
-            <div class="event_details">
-                <h1 class="text-2xl text-orange-300 font-bold">Events Details</h1>
-                <p class="text-black capitalize my-3">
-                    event Registered:
-                    <span
-                            class="bg-orange-300 py-1 px-2 rounded-xl capitalize font-bold"
-                    >5</span
-                    >
-                </p>
-                <p class="text-black capitalize my-3">
-                    event participated:
-                    <span
-                            class="bg-orange-300 py-1 px-2 rounded-xl capitalize font-bold"
-                    >3</span
-                    >
-                </p>
-            </div>
+        <!-- Profile Image -->
+        <div class="flex justify-center md:block">
+            <img src="{{ profile.img.url }}" class="rounded-full w-40 h-40 object-cover shadow-md" alt="Profile Image">
         </div>
-        <!-- profile card end -->
 
+        <!-- Profile Details -->
+        <div class="flex-1">
+            <h1 class="text-3xl font-bold text-orange-400">{{ profile.name }}</h1>
+            <p class="text-gray-700 mt-2">
+                {{ profile.bio|linebreaks }}
+            </p>
 
-        <hr class="my-10 border-1 border-black rounded-xl"/>
+            <a href="{% url 'profile_register' %}" class="btn btn-accent mt-4">Edit Profile</a>
+        </div>
 
-        <!-- user event  -->
-        {% for booking in all_booking %}
-        <div class="profile_events flex flex-col justify-center items-center">
-            <h1 class="text-2xl  font-bold my-5">
-                Registered Events
-            </h1>
-            <div class="card sm:card-side max-w-sm sm:max-w-full ring-gray-500 rounded-2xl ring-2">
-                <figure>
-                    <img
-                            src="{{ booking.event.img.url }}"
-                            alt="headphone"
-                            class="rounded-2xl event_img"
-                    />
-                </figure>
-                <div class="card-body ">
-                    <h5 class="card-title mb-0.5">{{ booking.event.name }}</h5>
-                    <p class="mb-2">
-                        {{ booking.event.event_details }}
-                    </p>
-                    <div class="card-actions">
-                        <a class="btn btn-primary" href="{% url 'event_details' booking.event.event_id %}">view details</a>
-                        <button class="btn btn-secondary">Add to cart</button>
+        <!-- Event Stats -->
+        <div class="bg-gray-50 rounded-xl p-5 shadow-inner w-full md:w-auto text-center md:text-left">
+            <h2 class="text-xl font-semibold text-orange-400">Event Summary</h2>
+
+            <p class="mt-3 text-lg">
+                Registered Events:
+                <span class="bg-orange-300 text-white py-1 px-3 rounded-lg font-bold">
+                    {{ registered_count }}
+                </span>
+            </p>
+
+            <p class="mt-3 text-lg">
+                Attended:
+                <span class="bg-orange-300 text-white py-1 px-3 rounded-lg font-bold">
+                    {{ attended_count }}
+                </span>
+            </p>
+        </div>
+
+    </div>
+    <!-- End Profile Header -->
+
+    <hr class="my-10 max-w-5xl mx-auto">
+
+    <!-- Registered Events -->
+    <div class="max-w-5xl mx-auto">
+        <h1 class="text-2xl font-bold mb-5 text-center">Your Registered Events</h1>
+
+        {% if all_booking %}
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            {% for booking in all_booking %}
+                {% if booking.event.event_type == "paid" and booking.is_paid or booking.event.event_type == "free" %}
+
+                <div class="card bg-base-100 shadow-xl rounded-2xl overflow-hidden">
+                    <!-- Event Image -->
+                    <img src="{{ booking.event.img.url }}" class="w-full h-48 object-cover">
+
+                    <div class="card-body">
+                        <h2 class="card-title">{{ booking.event.name }}</h2>
+                        <p class="line-clamp-2 text-gray-600">{{ booking.event.event_details }}</p>
+
+                        <div class="card-actions mt-3">
+                            <a href="{% url 'event_details' booking.event.event_id %}" class="btn btn-primary w-full">
+                                View Details
+                            </a>
+                            <a href="{% url 'payment_success' booking.booking_id %}" class="btn btn-primary w-full">
+                                View Qr code
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
+
+                {% endif %}
+            {% endfor %}
         </div>
-        {% endfor %}
 
-        <!-- club events  -->
-
-{#        <div class="profile_events flex flex-col justify-center items-center">#}
-{#            <h1 class="text-2xl  font-bold my-5">#}
-{#                All Events#}
-{#            </h1>#}
-{#            <div class="card sm:card-side max-w-sm sm:max-w-full ring-gray-500 rounded-2xl ring-2">#}
-{#                <figure>#}
-{#                    <img#}
-{#                            src="https://cdn.flyonui.com/fy-assets/components/card/image-7.png"#}
-{#                            alt="headphone"#}
-{#                    />#}
-{#                </figure>#}
-{#                <div class="card-body ">#}
-{#                    <h5 class="card-title mb-0.5">Airpods Max</h5>#}
-{#                    <p class="mb-2">#}
-{#                        This is a wider card with supporting text below as a natural#}
-{#                        lead-in to additional content.#}
-{#                    </p>#}
-{#                    <div class="card-actions">#}
-{#                        <button class="btn btn-primary">Buy Now</button>#}
-{#                        <button class="btn btn-secondary btn-soft">Add to cart</button>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-
-        <!-- dashbroad end -->
+        {% else %}
+            <p class="text-center text-gray-600 text-lg mt-10">
+                You haven't registered for any events yet.
+            </p>
+        {% endif %}
     </div>
+
+</div>
+
 {% endblock %}

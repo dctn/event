@@ -1,37 +1,44 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block head %}
-	
+
 {% endblock %}
 
 {% block body %}
 
-<!-- nav bar -->
+    <!-- nav bar -->
 
 
-<!-- events -->
-<div class="events flex flex-col justify-center items-center max-md">
-    {% for event in all_events %}
+    <!-- events -->
+    <div class="events flex flex-col justify-center items-center max-md">
+        {% for event in all_events %}
+            {% if event.is_verified %}
+                <div class="card m-5 p-5 sm:card-side max-w-sm sm:max-w-full">
+                    <figure><img class="rounded-2xl event_img" src="{{ event.img.url }}" alt="headphone"/></figure>
+                    <div class="card-body ">
+                        <a href="{% url 'event_details' event.event_id %}">
+                            <h5 class="card-title mb-0.5">{{ event.name }}</h5>
+                        </a>
+                        <p class="mb-2 max-w-[630px]">{{ event.event_details }}</p>
+                        <h5 class="text-gray-800">
+                            <img src="{% static 'icons/location-svgrepo-com.svg' %}" class="icon_size" alt="">
+                            </span>{{ event.location }}
+                        </h5>
+                        <h5 class="text-gray-800 flex gap-1">
+                            <img src="{% static 'icons/clock-svgrepo-com.svg' %}" class="icon_size" alt=""> {{ event.registion_on_date }}</h5>
+                        <h5 class="text-gray-800 capitalize ">Entry: {{ event.event_type }}</h5>
+                        <div class="card-actions">
+{#                            <button class="btn btn-primary"><a href="event_details.html">Register</a></button>#}
+                            <a class="btn  btn-gradient" href="{% url 'event_details' event.event_id %}">View
+                                details</a>
 
-    <div class="card m-5 p-5 sm:card-side max-w-sm sm:max-w-full">
-        <figure><img class="rounded-2xl event_img" src="{{ event.img.url }}" alt="headphone" /></figure>
-        <div class="card-body ">
-            <a href="{% url 'event_details' event.event_id %}">
-            <h5 class="card-title mb-0.5">{{ event.name }}</h5>
-            </a>
-            <p class="mb-2 max-w-[630px]">{{ event.event_details }}</p>
-            <h5 class="text-gray-800"><span class="icon-[fa6-solid--location-dot] size-4 mr-2 "></span></span>{{ event.location }}</h5>
-            <h5 class="text-gray-800"><span class="icon-[fa6-solid--clock] mr-2"></span>{{ event.registion_on_date }}</h5>
-            <h5 class="text-gray-800">Entry: {{ event.event_type }}</h5>
-            <div class="card-actions">
-                <button class="btn btn-primary"><a href="event_details.html">Register</a></button>
-                <a class="btn  btn-gradient" href="{% url 'event_details' event.event_id %}">View details</a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
 
-            </div>
-        </div>
+
     </div>
-    {% endfor %}
 
-
-</div>
-	
 {% endblock %}

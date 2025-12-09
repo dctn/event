@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -14,6 +16,8 @@ class Booking(models.Model):
     booked_date = models.DateTimeField(auto_now_add=True)
     amount_paid = models.IntegerField()
     is_paid = models.BooleanField(default=False)
-
+    qr_code_id =  models.UUIDField(default=uuid.uuid4,editable=False,unique=True,blank=True)
+    qr_image = models.ImageField(upload_to="qr_codes/", null=True, blank=True)
+    is_checked_in =  models.BooleanField(default=False)
     def __str__(self):
         return f"{self.user}"

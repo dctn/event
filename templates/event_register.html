@@ -168,9 +168,11 @@
             <div class="flex flex-col gap-4">
               <div>
                 <label class="label-text capitalize" for="userProfile"
-                  >Upload event Poster and pics </label
-                >
-                  {{ form.img }}                <span class="error-message">Please select the file</span>
+                  >Upload event Poster and pics (First image must be poster of Event)
+                </label>
+
+                  {{ form.img }}
+                  <span class="error-message">Please select the file</span>
                 <span class="success-message">Looks good!</span>
               </div>
 
