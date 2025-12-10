@@ -31,7 +31,11 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+if os.environ.get("EVIRONMENT") == "production":
+    ALLOWED_HOSTS = ["20.197.18.109"]
+    DJANGO_CSRF_TRUSTED_ORIGINS = ['http://20.197.18.109']
+else:
+    ALLOWED_HOSTS = []
 
 
 # Application definition
