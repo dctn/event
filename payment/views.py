@@ -7,7 +7,7 @@ from django.conf import settings
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
-
+import os
 from core.models import Event, Profile
 from .models import Booking
 
@@ -50,7 +50,12 @@ def proccess_order(request,event_id):
         booking_id=razorpay_order['id']
     )
 
-    callback_url = request.build_absolute_uri(reverse(settings.RAZOR_PAY_CALLBACK_URL))
+    if os.environ.get("ENVIRONMENT") == "production":
+        callback_url = request.build_absolute_uri(reverse(settings.RAZOR_PAY_CALLBACK_URL)).replace("http://",
+                                                                                                    "https://")
+    else:
+        callback_url = request.build_absolute_uri(reverse(settings.RAZOR_PAY_CALLBACK_URL))
+
     return JsonResponse({
         "order_id": razorpay_order["id"],
         "RAZORPAY_KEY_ID": settings.RAZORPAY_KEY_ID,

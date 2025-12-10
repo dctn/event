@@ -31,7 +31,7 @@ class Profile(models.Model):
     interested_event = models.CharField(choices=EventChoices.choices,default=EventChoices.BOTH,max_length=100)
     bio = models.TextField()
     gender = models.CharField(choices=GenderChoice.choices,max_length=100,default="null")
-    img = models.ImageField(upload_to="profile_img/",default="logo_dot_sm.png",null=True,blank=True)
+    img = models.ImageField(upload_to="image/profile_img/",default="logo_dot_sm.png",null=True,blank=True)
 
     def __str__(self):
         return f"{self.user}: {self.name}"
@@ -57,10 +57,10 @@ class Event(models.Model):
     event_details = models.TextField()
 
     # event Images
-    img = models.ImageField(upload_to="event_img/",default="logo_dot_sm.png")
-    img_2 = models.ImageField(upload_to="event_img/",null=True,blank=True)
-    img_3 = models.ImageField(upload_to="event_img/",null=True,blank=True)
-    img_4 = models.ImageField(upload_to="event_img/",null=True,blank=True)
+    img = models.ImageField(upload_to="image/event_img/",default="logo_dot_sm.png")
+    img_2 = models.ImageField(upload_to="image/event_img/",null=True,blank=True)
+    img_3 = models.ImageField(upload_to="image/event_img/",null=True,blank=True)
+    img_4 = models.ImageField(upload_to="image/event_img/",null=True,blank=True)
 
 
 

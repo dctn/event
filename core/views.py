@@ -39,7 +39,7 @@ def event_details(request, event_id):
     profile = Profile.objects.get(user=request.user)
 
     total_amount = calculate_total_charge(product_price=int(event.amount),
-                                          platform_fee_pct=float(settings.PLATFORM_FEE),
+                                          platform_fee_pct=float(event.commission),
                                           razorpay_fee_pct=0.03,
                                           gst_pct=0.18)
 
@@ -147,3 +147,6 @@ def event_update(request, event_id):
     else:
         messages.error(request, "Not having access")
         return redirect("home")
+
+def cgpa(request):
+    return render(request, "cgpa.html")

@@ -187,8 +187,8 @@
         <!-- MENU -->
         <div class="nav-menu" id="navMenu">
             <ul>
-                <li><a href="#">Club</a></li>
-                <li><a href="#">Search</a></li>
+
+{#                <li><a href="#">Search</a></li>#}
 
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'profile' %}" class="btn-primary">Profile</a></li>
@@ -198,6 +198,7 @@
                     <li><a href="{% url 'account_login' %}" class="btn-primary">Login</a></li>
                     <li><a href="{% url 'account_signup' %}" class="btn-primary">Signup</a></li>
                 {% endif %}
+                <li><a href="{% url 'CGPA_Calculator' %}" class="btn-primary">CGPA Calculator</a></li>
             </ul>
         </div>
 

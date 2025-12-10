@@ -1,0 +1,141 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>SRM College GPA, SGPA & CGPA Calculator | Fast, Accurate, Mobile-Friendly</title>
+    <meta name="description" content="Easily calculate your GPA, SGPA, and CGPA for SRM College using our fast, accurate, and mobile-optimized tool. Updated for 2025. Free, easy, and trusted by SRM students.">
+    <meta name="keywords" content="SRM CGPA calculator, SRM GPA tool, calculate GPA SRM, CGPA calculator SRM University, SRM grade point system">
+
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="SRM College GPA, SGPA & CGPA Calculator">
+    <meta property="og:description" content="Calculate your GPA, SGPA, and CGPA for SRM College quickly and accurately. Mobile-friendly, free, and trusted by thousands of SRM students.">
+    <meta property="og:url" content="https://campify.tech/">
+    <meta property="og:site_name" content="SRM GPA, SGPA & CGPA Calculator">
+    <meta property="og:image" content="https://campify.tech/srm-gpa-thumbnail.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SRM College GPA, SGPA & CGPA Calculator">
+    <meta name="twitter:description" content="SRM College students: Instantly calculate your GPA, SGPA, and CGPA online. Fast, accurate, and mobile-ready.">
+    <meta name="twitter:image" content="https://campify.tech/srm-gpa-thumbnail.jpg">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://campify.tech/">
+
+    <!-- Mobile Optimization -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon (optional but professional) -->
+    <link rel="icon" href="https://campify.tech/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+
+    <title>CGPA</title>
+    <link rel="stylesheet" href="{% static 'cgpa/style.css' %}">
+</head>
+<body>
+
+{% include 'includes/nav.html' %}
+
+<div class="wrapper">
+    <div class="header">
+        <h1 id="main_heading">GPA & SGPA Calculator for <span id="strik">SRM</span> College student (2025)</h1>
+
+        <h3 class="title">
+            <span class="highlight"> NOTE:</span>
+            <br>
+            If you are calculating using only your current semester’s grades, you are calculating your <span class="highlight">SGPA (Semester Grade Point Average)</span> , not your CGPA (Cumulative Grade Point Average).
+
+            <br> <span class="highlight"> CGPA is calculated using all semesters’ grades and credits combined </span>, representing your overall academic performance across your entire course or program.
+
+        </h3>
+
+
+
+
+    </div>
+    <div class="inputs">
+
+        <div class="input">
+            <label for="">Credit </label>
+            <input type="number" name="" class="credit" id="input_1">
+
+            <label>Grade </label>
+            <select name="" id="grade_1" class="grade">
+                <option value="10">O</option>
+                <option value="9">A+</option>
+                <option value="8">A</option>
+                <option value="7">B+</option>
+                <option value="6">B</option>
+                <option value="5">C</option>
+                <option value="4">P</option>
+                <option value="0">F</option>
+                <option value="0">Ab</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="btns">
+        <button class="btn" onclick="add_input()">add more marks</button>
+        <button class="btn" onclick="cal_gpa()">Calculate</button>
+    </div>
+
+<h2 id="result"></h2>
+</div>
+
+
+<footer>
+    <div class="content">
+        <img src="logo.png" alt="">
+        <h4>developed by <del>stranger</del></h4>
+
+    </div>
+
+    <div class="links">
+        <ul>
+            <li><ion-icon name="logo-instagram"></ion-icon><a href="https://www.instagram.com/stranger.conf/" target="_blank">instagram</a></li>
+            <li><ion-icon name="logo-linkedin"></ion-icon><a href="https://www.linkedin.com/in/hmaheswara" target="_blank">linkedin</a></li>
+            <li><ion-icon name="logo-github"></ion-icon><a href="https://github.com/dctn" target="_blank">github</a></li>
+        </ul>
+        <br>
+        <p>  © 2025 stranger. All rights reserved.
+        </p>
+    </div>
+</footer>
+
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="{% static 'cgpa/main.js' %}"></script>
+
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "SRM College GPA, SGPA & CGPA Calculator",
+        "url": "https://campify.tech/",
+        "logo": "https://campify.tech/srm-gpa-logo.png",
+        "description": "A fast, accurate, and mobile-friendly GPA, SGPA, and CGPA calculator for SRM College students.",
+        "sameAs": [
+            "https://www.facebook.com/SRMUniversity",
+            "https://twitter.com/SRM_Univ",
+            "https://www.instagram.com/srmuniversity/"
+        ]
+    }
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-08SVXJ2R79"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-08SVXJ2R79');
+</script>
+</body>
+</html>

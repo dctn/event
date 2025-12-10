@@ -6,5 +6,6 @@ urlpatterns = [
     path("profile/",profile,name="profile"),
     path("profile_register/",profile_form,name="profile_register"),
     path("event_registation/",event_registation,name="event_registation"),
-    path("event_update/<event_id>/", event_update, name="event_update")
+    path("event_update/<event_id>/", event_update, name="event_update"),
+    path("CGPA_Calculator/", cgpa, name="CGPA_Calculator"),
 ]
