@@ -1,0 +1,17 @@
+@import 'tailwindcss';
+@plugin "flyonui" {
+    themes:
+        light --default,
+        dark --prefersdark,
+        gourmet;
+}
+
+@import 'flyonui/variants.css';
+@import "flyonui/src/vendor/flatpickr.css";
+@plugin "@iconify/tailwind4";
+@source "./node_modules/flyonui/dist/index.js"; /* Require only if you want to use FlyonUI JS component */
+@import "flyonui/src/vendor/datatables.css";
+
+.btn_primary_color {
+    @apply [--btn-color:#f3861d];
+}

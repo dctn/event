@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-environment = os.environ.get("EVIRONMENT")
+environment = os.environ.get("ENVIRONMENT")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,9 +31,9 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-if os.environ.get("EVIRONMENT") == "production":
-    ALLOWED_HOSTS = ["20.197.18.109"]
-    DJANGO_CSRF_TRUSTED_ORIGINS = ['http://20.197.18.109']
+if os.environ.get("ENVIRONMENT") == "production":
+    ALLOWED_HOSTS = ["20.197.18.109","campusfest.live","www.campusfest.live","localhost",]
+    DJANGO_CSRF_TRUSTED_ORIGINS = ["http://20.197.18.109","http://campusfest.live","https://campusfest.live","http://www.campusfest.live","https://www.campusfest.live",]
 else:
     ALLOWED_HOSTS = []
 
