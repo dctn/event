@@ -55,16 +55,19 @@
                 document.getElementById("loadingMsg").innerText = "No camera found.";
                 return;
             }
+            let cameraId;
 
-// Try to find back camera first
-            let backCamera = devices.find(device =>
-                device.label.toLowerCase().includes("back") ||
-                device.label.toLowerCase().includes("environment")
-            );
-
-// Fallback to first camera if back camera is not found
-            const cameraId = backCamera ? backCamera.deviceId : devices[0].id;
-
+            if (devices[2]) {
+                // Use third camera if it exists
+                cameraId = devices[2].deviceId;
+            } else if (devices[0]) {
+                // Otherwise fallback to first camera
+                cameraId = devices[0].deviceId;
+            } else {
+                // No camera available
+                document.getElementById("loadingMsg").innerText = "No camera found.";
+                return;
+            }
             await reader.start(
                 cameraId,
                 {fps: 10, qrbox: 250},
