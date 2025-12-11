@@ -55,19 +55,10 @@
                 document.getElementById("loadingMsg").innerText = "No camera found.";
                 return;
             }
-            let cameraId;
 
-            if (devices[2]) {
-                // Use third camera if it exists
-                cameraId = devices[2].deviceId;
-            } else if (devices[0]) {
-                // Otherwise fallback to first camera
-                cameraId = devices[0].deviceId;
-            } else {
-                // No camera available
-                document.getElementById("loadingMsg").innerText = "No camera found.";
-                return;
-            }
+	   const cameraId = devices[2].id;
+
+
             await reader.start(
                 cameraId,
                 {fps: 10, qrbox: 250},
