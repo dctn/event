@@ -1,3 +1,5 @@
+import uuid
+
 from django.contrib.auth.decorators import login_required
 from django.core.files.base import ContentFile
 from django.http import JsonResponse
@@ -105,12 +107,25 @@ def register_free_event(request,event_id,action):
     event = get_object_or_404(Event,event_id=event_id)
     profile = get_object_or_404(Profile,user=request.user)
     if action == "register":
-        Booking.objects.create(
+        booking = Booking.objects.create(
             user= profile,
             event=event,
             amount_paid=0,
+            booking_id=uuid.uuid4()
         )
         event.current_slots -= 1
+
+        if not booking.qr_image:
+            qr_url = request.build_absolute_uri(
+                reverse("checkin_ticket", args=[booking.qr_code_id])
+            )
+            qr_img = generate_qr_code(qr_url)
+            booking.qr_image.save(
+                f"qr_{booking.qr_code_id}.png",
+                ContentFile(qr_img),
+                save=True
+            )
+
         messages.success(request,"your ticket slot is booked")
         return redirect("profile")
     elif action == "un_register":
@@ -118,6 +133,7 @@ def register_free_event(request,event_id,action):
         event.current_slots += 1
         messages.success(request,"your ticket slot is un register")
         return redirect("event_details",event_id)
+
 
 def payment_success(request,booking_id):
     profile = get_object_or_404(Profile,user=request.user)
@@ -129,7 +145,7 @@ def payment_success(request,booking_id):
             )
             qr_img = generate_qr_code(qr_url)
             booking.qr_image.save(
-                f"qr_{booking.qr_code_id}",
+                f"qr_{booking.qr_code_id}.png",
                 ContentFile(qr_img),
                 save=True
             )

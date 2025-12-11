@@ -72,7 +72,7 @@ class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = "__all__"
-        exclude = ["event_id","is_verified","created_by","current_slots"]
+        exclude = ["event_id","is_verified","created_by","current_slots","commission"]
 
         widgets = {
             "name": forms.TextInput(attrs={"class":"input","placeholder":"John"}),
