@@ -140,7 +140,7 @@ def payment_success(request,booking_id):
 
 
     # checking for profile details
-    if not profile.phone_no or not profile.department or profile.name or profile.college_name:
+    if not profile.phone_no or not profile.department:
         return redirect('profile_register')
 
     try:
