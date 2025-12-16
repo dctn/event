@@ -19,7 +19,7 @@
                         <a href="{% url 'event_details' event.event_id %}">
                             <h5 class="card-title mb-0.5">{{ event.name }}</h5>
                         </a>
-                        <p class="mb-2 max-w-[630px]">{{ event.event_details }}</p>
+                        <p class="mb-2 max-w-[630px]">{{ event.event_details|truncatewords:20 }}</p>
                         <h5 class="text-gray-800">
                             <img src="{% static 'icons/location-svgrepo-com.svg' %}" class="icon_size" alt="">
                             </span>{{ event.location }}
