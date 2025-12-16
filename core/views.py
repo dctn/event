@@ -33,10 +33,15 @@ def home(request):
 
 @login_required
 def event_details(request, event_id):
+
     event = get_object_or_404(Event, event_id=event_id)
     is_owner = False
     is_already_registered = False
     profile = Profile.objects.get(user=request.user)
+
+    # checking for profile details
+    if not profile.phone_no or not profile.department:
+        return redirect('profile_register')
 
     total_amount = calculate_total_charge(product_price=int(event.amount),
                                           platform_fee_pct=float(event.commission),
