@@ -41,7 +41,7 @@ def event_details(request, event_id):
 
     # checking for profile details
     if not profile.phone_no or not profile.department:
-        return redirect('profile_register')
+        return redirect('profile_register_with_event',event_id=event_id)
 
     total_amount = calculate_total_charge(product_price=int(event.amount),
                                           platform_fee_pct=float(event.commission),
@@ -94,16 +94,24 @@ def profile(request):
     return render(request, "profile.html", context)
 
 
-def profile_form(request):
+def profile_form(request,event_id=None):
     user_profile = Profile.objects.get(user=request.user)
+
+
     if request.method == "POST":
         form = ProfileForm(request.POST, request.FILES, instance=user_profile)
         if form.is_valid():
             profile_save = form.save()
+            if event_id:
+                return redirect("event_details", event_id=event_id)
+
             return redirect("profile")
 
     else:
         form = ProfileForm(instance=user_profile)
+
+
+
     context = {
         "form": form
     }
