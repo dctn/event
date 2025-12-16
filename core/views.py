@@ -40,7 +40,7 @@ def event_details(request, event_id):
     profile = Profile.objects.get(user=request.user)
 
     # checking for profile details
-    if not profile.phone_no or not profile.department:
+    if not profile.phone_no or not profile.department or profile.name or profile.college_name:
         return redirect('profile_register')
 
     total_amount = calculate_total_charge(product_price=int(event.amount),

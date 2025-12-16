@@ -137,6 +137,12 @@ def register_free_event(request,event_id,action):
 
 def payment_success(request,booking_id):
     profile = get_object_or_404(Profile,user=request.user)
+
+
+    # checking for profile details
+    if not profile.phone_no or not profile.department or profile.name or profile.college_name:
+        return redirect('profile_register')
+
     try:
         booking = get_object_or_404(Booking,booking_id=booking_id,user=profile)
         if not booking.qr_image:
