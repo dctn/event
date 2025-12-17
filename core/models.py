@@ -1,5 +1,5 @@
 import uuid
-
+from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
@@ -85,4 +85,8 @@ class Event(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
+    @property
+    def is_booking_close(self):
+        return self.registion_closing_date >= timezone.now().date()
 

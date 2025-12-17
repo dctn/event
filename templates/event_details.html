@@ -162,6 +162,12 @@
                                             </button>
 
                                         {% endif %}
+
+                                    {% elif event.current_slots == 0 %}
+                                        <p class="mb-4 font-mono">All seats are fulled</p>
+                                    {% elif not event.is_booking_close %}
+                                        <p class="mb-4 font-mono">Booking Date is closed</p>
+
                                     {% else %}
                                         <h5 class="card-title mb-2.5 capitalize text-2xl">ticket:</h5>
                                         <p class="mb-4 font-mono">Price per ticket: Free</p>
@@ -182,7 +188,8 @@
                                     {% if is_owner %}
                                         <a href="{% url 'event_update' event.event_id %}"
                                            class="btn btn-primary">Update</a>
-                                        <a href="{% url 'qr_scan' event.event_id %}" class="btn btn-gradient">Qr code</a>
+                                        <a href="{% url 'qr_scan' event.event_id %}" class="btn btn-gradient">Qr
+                                            code</a>
 
                                     {% endif %}
                                     </div>

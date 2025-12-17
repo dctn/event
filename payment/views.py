@@ -114,6 +114,7 @@ def register_free_event(request,event_id,action):
             booking_id=uuid.uuid4()
         )
         event.current_slots -= 1
+        event.save()
 
         if not booking.qr_image:
             qr_url = request.build_absolute_uri(
@@ -131,6 +132,7 @@ def register_free_event(request,event_id,action):
     elif action == "un_register":
         Booking.objects.get(user=profile,event=event).delete()
         event.current_slots += 1
+        event.save()
         messages.success(request,"your ticket slot is un register")
         return redirect("event_details",event_id)
 
