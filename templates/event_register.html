@@ -3,338 +3,349 @@
 {% block head %}
 
     <title>Register</title>
-    <link rel="stylesheet" href="{% static 'css/output.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/flatpickr.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/output.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/flatpickr.css' %}"/>
 
 {% endblock %}
 
 {% block body %}
 
 
-  <body data-theme="light">
+    <body data-theme="light">
     <div
-      class="bg-base-100 w-full max-w-[1100px] mx-auto rounded-lg shadow-base-300/20 shadow-sm"
+            class="bg-base-100 w-full max-w-[1100px] mx-auto rounded-lg shadow-base-300/20 shadow-sm"
     >
-      <h5 class="bg-base-300/10 rounded-t-lg p-4 text-xl font-bold">
-        Event Registration Form
-      </h5>
-      <div class="w-full p-4">
-        <form class="needs-validation peer grid gap-y-4" novalidate method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-          <!-- Account Details -->
-          <div class="w-full">
-            <h6 class="text-lg font-semibold">1. Account Details</h6>
-            <hr class="mb-4 mt-2" />
-          </div>
+        <h5 class="bg-base-300/10 rounded-t-lg p-4 text-xl font-bold">
+            Event Registration Form
+        </h5>
+        <div class="w-full p-4">
+            <form class="needs-validation peer grid gap-y-4" novalidate method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- Account Details -->
+                <div class="w-full">
+                    <h6 class="text-lg font-semibold">1. Account Details</h6>
+                    <hr class="mb-4 mt-2"/>
+                </div>
 
-          <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div>
-              <label class="label-text" for="firstName">Event Name </label>
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <div>
+                        <label class="label-text" for="firstName">Event Name </label>
 
-                {{ form.name }}
-              <span class="error-message">Please enter your name.</span>
+                        {{ form.name }}
+                        <span class="error-message">Please enter your name.</span>
 
-              <span class="success-message">Looks good!</span>
-            </div>
+                        <span class="success-message">Looks good!</span>
+                    </div>
 
-            <div>
-              <label class="label-text capitalize" for="lastName"
-                >location Name</label
-              >
+                    <div>
+                        <label class="label-text capitalize" for="lastName"
+                        >location Name</label
+                        >
 
-                {{ form.location }}
+                        {{ form.location }}
 
-              <span class="error-message">Please enter your last name.</span>
-              <span class="success-message">Looks good!</span>
-            </div>
-          </div>
+                        <span class="error-message">Please enter your last name.</span>
+                        <span class="success-message">Looks good!</span>
+                    </div>
+                </div>
 
-          <!-- Email and password -->
-          <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div>
-              <label class="label-text" for="userEmail">Phone NO</label>
+                <!-- Email and password -->
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <div>
+                        <label class="label-text" for="userEmail">Phone NO</label>
 
-                {{ form.phone_no }}
+                        {{ form.phone_no }}
 
-              <span class="error-message">Please enter a valid email</span>
-              <span class="success-message">Looks good!</span>
-            </div>
+                        <span class="error-message">Please enter a valid email</span>
+                        <span class="success-message">Looks good!</span>
+                    </div>
 
-            <div>
-              <label class="label-text capitalize" for="userPassword"
-                >create Code password, we ask in case of any safety issue</label
-              >
-              <div class="input">
+                    <div>
+                        <label class="label-text capitalize" for="userPassword"
+                        >create Code password, we ask in case of any safety issue</label
+                        >
+                        <div class="input">
 
-                  {{ form.password }}
+                            {{ form.password }}
 
-                <button
-                  type="button"
-                  data-toggle-password='{ "target": "#userPassword" }'
-                  class="my-auto ms-4 block cursor-pointer"
-                >
+                            <button
+                                    type="button"
+                                    data-toggle-password='{ "target": "#userPassword" }'
+                                    class="my-auto ms-4 block cursor-pointer"
+                            >
                   <span
-                    class="icon-[tabler--eye] text-base-content/80 password-active:block hidden size-4 shrink-0"
+                          class="icon-[tabler--eye] text-base-content/80 password-active:block hidden size-4 shrink-0"
                   ></span>
-                  <span
-                    class="icon-[tabler--eye-off] text-base-content/80 password-active:hidden block size-4 shrink-0"
-                  ></span>
-                </button>
-              </div>
-              <span class="error-message">Please enter a valid password</span>
-              <span class="success-message">Looks good!</span>
-            </div>
+                                <span
+                                        class="icon-[tabler--eye-off] text-base-content/80 password-active:hidden block size-4 shrink-0"
+                                ></span>
+                            </button>
+                        </div>
+                        <span class="error-message">Please enter a valid password</span>
+                        <span class="success-message">Looks good!</span>
+                    </div>
 
-            <div>
-              <label class="label-text" for="clubname">club Name</label>
+                    <div>
+                        <label class="label-text" for="clubname">club Name</label>
 
-                {{ form.club_name }}
+                        {{ form.club_name }}
 
-              <span class="error-message">Please enter a valid location</span>
-              <span class="success-message">Looks good!</span>
-            </div>
+                        <span class="error-message">Please enter a valid location</span>
+                        <span class="success-message">Looks good!</span>
+                    </div>
 
-            <div>
-              <label class="label-text capitalize" for="eventslot"
-                >No. of slot available</label
-              >
+                    <div>
+                        <label class="label-text capitalize" for="eventslot"
+                        >No. of slot available</label
+                        >
 
-                {{ form.no_of_slots }}
+                        {{ form.no_of_slots }}
 
-              <span class="error-message">Please enter a valid location</span>
-              <span class="success-message">Looks good!</span>
-            </div>
-          </div>
+                        <span class="error-message">Please enter a valid location</span>
+                        <span class="success-message">Looks good!</span>
+                    </div>
 
-          <!-- organizers info -->
-          <div class="w-full">
-            <h6 class="text-lg font-semibold capitalize">
-              2. organizers and volunteer Info
-            </h6>
-            <span
-              class="capitalize bg-warning text-warning-content font-extrabold p-0.5"
-            >
+                    <div>
+                        <label class="label-text capitalize" for="eventslot"
+                        >How many time ticket can be used</label
+                        >
+
+                        {{ form.no_checkin_allowed }}
+
+                        <span class="error-message">Please enter a valid location</span>
+                        <span class="success-message">Looks good!</span>
+                    </div>
+                </div>
+
+                <!-- organizers info -->
+                <div class="w-full">
+                    <h6 class="text-lg font-semibold capitalize">
+                        2. organizers and volunteer Info
+                    </h6>
+                    <span
+                            class="capitalize bg-warning text-warning-content font-extrabold p-0.5"
+                    >
               A Details must be true that will be verfied and also visible to
               user to ask details about Event</span
-            >
-            <hr class="mb-4 mt-2" />
-          </div>
+                    >
+                    <hr class="mb-4 mt-2"/>
+                </div>
 
 
-          <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
 
 
-            <div>
-              <label class="label-text capitalize" for="firstName"
-                >organizers person Name
-              </label>
+                    <div>
+                        <label class="label-text capitalize" for="firstName"
+                        >organizers person Name
+                        </label>
 
-                {{ form.volunteer_name }}
+                        {{ form.volunteer_name }}
 
-              <span class="error-message">Please enter your name.</span>
-              <span class="success-message">Looks good!</span>
-            </div>
+                        <span class="error-message">Please enter your name.</span>
+                        <span class="success-message">Looks good!</span>
+                    </div>
 
-            <div>
-              <label class="label-text capitalize" for="lastName"
-                >person Phone no</label
-              >
+                    <div>
+                        <label class="label-text capitalize" for="lastName"
+                        >person Phone no</label
+                        >
 
-                {{ form.volunteer_phone_no }}
+                        {{ form.volunteer_phone_no }}
 
-              <span class="error-message">Please enter your last name.</span>
-              <span class="success-message">Looks good!</span>
-            </div>
+                        <span class="error-message">Please enter your last name.</span>
+                        <span class="success-message">Looks good!</span>
+                    </div>
 
-            <div class="">
-              <label class="label-text capitalize" for="lastName"
-                >person position in organization</label
-              >
+                    <div class="">
+                        <label class="label-text capitalize" for="lastName"
+                        >person position in organization</label
+                        >
 
-                {{ form.volunteer_position }}
+                        {{ form.volunteer_position }}
 
-              <span class="error-message">Please enter your last name.</span>
-              <span class="success-message">Looks good!</span>
-            </div>
-          </div>
+                        <span class="error-message">Please enter your last name.</span>
+                        <span class="success-message">Looks good!</span>
+                    </div>
+                </div>
 
-          <!-- Personal Info -->
-          <div class="w-full">
-            <h6 class="text-lg font-semibold">3. Event Info</h6>
-            <hr class="mb-4 mt-2" />
-          </div>
-          <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <!-- all event pics -->
-            <div class="flex flex-col gap-4">
-              <div>
-                <label class="label-text capitalize" for="userProfile"
-                  >Upload event Poster and pics (First image must be poster of Event)
-                </label>
+                <!-- Personal Info -->
+                <div class="w-full">
+                    <h6 class="text-lg font-semibold">3. Event Info</h6>
+                    <hr class="mb-4 mt-2"/>
+                </div>
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <!-- all event pics -->
+                    <div class="flex flex-col gap-4">
+                        <div>
+                            <label class="label-text capitalize" for="userProfile"
+                            >Upload event Poster and pics (First image must be poster of Event)
+                            </label>
 
-                  {{ form.img }}
-                  <span class="error-message">Please select the file</span>
-                <span class="success-message">Looks good!</span>
-              </div>
+                            {{ form.img }}
+                            <span class="error-message">Please select the file</span>
+                            <span class="success-message">Looks good!</span>
+                        </div>
 
-              <div>
-                <label class="label-text capitalize" for="userProfile"
-                  >Upload event Poster and pics (optional)</label
-                >
+                        <div>
+                            <label class="label-text capitalize" for="userProfile"
+                            >Upload event Poster and pics (optional)</label
+                            >
 
-                  {{ form.img_2 }}
+                            {{ form.img_2 }}
 
-                  <span class="error-message">Please select the file</span>
-                <span class="success-message">Looks good!</span>
-              </div>
+                            <span class="error-message">Please select the file</span>
+                            <span class="success-message">Looks good!</span>
+                        </div>
 
-              <div>
-                <label class="label-text capitalize" for="userProfile"
-                  >Upload event Poster and pics (optional)</label
-                >
+                        <div>
+                            <label class="label-text capitalize" for="userProfile"
+                            >Upload event Poster and pics (optional)</label
+                            >
 
-                  {{ form.img_3 }}
+                            {{ form.img_3 }}
 
-                <span class="error-message">Please select the file</span>
-                <span class="success-message">Looks good!</span>
-              </div>
+                            <span class="error-message">Please select the file</span>
+                            <span class="success-message">Looks good!</span>
+                        </div>
 
-              <div>
-                <label class="label-text capitalize" for="userProfile"
-                  >Upload event Poster and pics (optional)</label
-                >
+                        <div>
+                            <label class="label-text capitalize" for="userProfile"
+                            >Upload event Poster and pics (optional)</label
+                            >
 
-                  {{ form.img_3 }}
-
-
-                <span class="error-message">Please select the file</span>
-                <span class="success-message">Looks good!</span>
-              </div>
-            </div>
-
-            <!-- start and end date -->
-            <div class="flex flex-col gap-4">
-              <div>
-                <label class="label-text" for="jsPickr"
-                  >Registion opening date</label
-                >
-
-                  {{ form.registion_opening_date }}
-
-                <span class="error-message">Please select your DOB</span>
-                <span class="success-message">Looks good!</span>
-              </div>
-
-              <div>
-                <label class="label-text" for="jsPickr"
-                  >Registion closing date</label
-                >
-
-                  {{ form.registion_closing_date }}
-                <span class="error-message">Please select your DOB</span>
-                <span class="success-message">Looks good!</span>
-              </div>
-
-              <div>
-                <label class="label-text" for="jsPickr"
-                  >Event starting time</label
-                >
-                 {{ form.event_starting_time }}
-
-                <span class="error-message">Please select your DOB</span>
-                <span class="success-message">Looks good!</span>
-              </div>
-
-              <div>
-                <label class="label-text" for="jsPickr">Event on Date</label>
-
-                  {{ form.registion_on_date }}
-
-                <span class="error-message">Please select your DOB</span>
-                <span class="success-message">Looks good!</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                            {{ form.img_3 }}
 
 
-            <div>
+                            <span class="error-message">Please select the file</span>
+                            <span class="success-message">Looks good!</span>
+                        </div>
+                    </div>
 
-              <div class="label-text">Event Type</div>
-               {% for radio in form.event_type %}
-              <div class="flex items-center gap-2">
+                    <!-- start and end date -->
+                    <div class="flex flex-col gap-4">
+                        <div>
+                            <label class="label-text" for="jsPickr"
+                            >Registion opening date</label
+                            >
 
-              {{ radio.tag }}
+                            {{ form.registion_opening_date }}
 
-                <label class="label-text text-base" for="free"
-                  >{{ radio.choice_label }}</label
-                >
-              </div>
-                {% endfor %}
+                            <span class="error-message">Please select your DOB</span>
+                            <span class="success-message">Looks good!</span>
+                        </div>
 
-              <span class="error-message">Please select your Gender</span>
-              <span class="success-message">Looks good!</span>
-            </div>
+                        <div>
+                            <label class="label-text" for="jsPickr"
+                            >Registion closing date</label
+                            >
 
-             <div>
-              <label class="label-text capitalize" for="firstName"
-                >Enter price per Ticket
-                  <span class="capitalize bg-warning text-warning-content font-extrabold p-0.5">(if it is free event then enter 0)
+                            {{ form.registion_closing_date }}
+                            <span class="error-message">Please select your DOB</span>
+                            <span class="success-message">Looks good!</span>
+                        </div>
+
+                        <div>
+                            <label class="label-text" for="jsPickr"
+                            >Event starting time</label
+                            >
+                            {{ form.event_starting_time }}
+
+                            <span class="error-message">Please select your DOB</span>
+                            <span class="success-message">Looks good!</span>
+                        </div>
+
+                        <div>
+                            <label class="label-text" for="jsPickr">Event on Date</label>
+
+                            {{ form.registion_on_date }}
+
+                            <span class="error-message">Please select your DOB</span>
+                            <span class="success-message">Looks good!</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+
+
+                    <div>
+
+                        <div class="label-text">Event Type</div>
+                        {% for radio in form.event_type %}
+                            <div class="flex items-center gap-2">
+
+                                {{ radio.tag }}
+
+                                <label class="label-text text-base" for="free"
+                                >{{ radio.choice_label }}</label
+                                >
+                            </div>
+                        {% endfor %}
+
+                        <span class="error-message">Please select your Gender</span>
+                        <span class="success-message">Looks good!</span>
+                    </div>
+
+                    <div>
+                        <label class="label-text capitalize" for="firstName"
+                        >Enter price per Ticket
+                            <span class="capitalize bg-warning text-warning-content font-extrabold p-0.5">(if it is free event then enter 0)
                       </span>
-              </label>
+                        </label>
 
-                {{ form.amount }}
+                        {{ form.amount }}
 
-              <span class="error-message">Please enter your name.</span>
-              <span class="success-message">Looks good!</span>
-            </div>
+                        <span class="error-message">Please enter your name.</span>
+                        <span class="success-message">Looks good!</span>
+                    </div>
 
-          </div>
+                </div>
 
-          <div class="w-full">
-            <label class="label-text" for="userBio"
-              >Enter Details about event:</label
-            >
+                <div class="w-full">
+                    <label class="label-text" for="userBio"
+                    >Enter Details about event:</label
+                    >
 
-              {{ form.event_details }}
+                    {{ form.event_details }}
 
-            <span class="error-message">Please write few words</span>
-            <span class="success-message">Looks good!</span>
-          </div>
-          <div>
-            <div class="flex items-center gap-3">
+                    <span class="error-message">Please write few words</span>
+                    <span class="success-message">Looks good!</span>
+                </div>
+                <div>
+                    <div class="flex items-center gap-3">
 
-              <input
-                type="checkbox"
-                id="userSwitch"
-                class="switch switch-primary"
-                required
-              />
+                        <input
+                                type="checkbox"
+                                id="userSwitch"
+                                class="switch switch-primary"
+                                required
+                        />
 
-              <label class="label-text text-base" for="userSwitch"
-                >Send me related emails</label
-              >
-            </div>
-            <span class="error-message">Please select your preference</span>
-            <span class="success-message">Looks good!</span>
-          </div>
-          <div>
-            <div class="flex items-center gap-3">
-              <input
-                type="checkbox"
-                class="checkbox checkbox-primary"
-                id="userAgre"
-                required
-              />
-              <label class="label-text text-base" for="userAgre"
-                >Agree to our terms and conditions</label
-              >
-            </div>
-            <span class="error-message">Please confirm our T&C</span>
-            <span class="success-message">Looks good!</span>
-          </div>
+                        <label class="label-text text-base" for="userSwitch"
+                        >Send me related emails</label
+                        >
+                    </div>
+                    <span class="error-message">Please select your preference</span>
+                    <span class="success-message">Looks good!</span>
+                </div>
+                <div>
+                    <div class="flex items-center gap-3">
+                        <input
+                                type="checkbox"
+                                class="checkbox checkbox-primary"
+                                id="userAgre"
+                                required
+                        />
+                        <label class="label-text text-base" for="userAgre"
+                        >Agree to our terms and conditions</label
+                        >
+                    </div>
+                    <span class="error-message">Please confirm our T&C</span>
+                    <span class="success-message">Looks good!</span>
+                </div>
 
-         {# error msg               #}
+                {# error msg               #}
                 {% if form.errors %}
                     <div class="alert alert-error capitalize    ">
                         <ul>
@@ -351,68 +362,68 @@
                 {% endif %}
 
 
-          <!-- Submit button -->
-          <div class="mt-4">
-            <button
-              type="submit"
-              id="submitBtn"
-              disabled
-              name="submitButton"
-              class="btn btn-primary"
-            >
-              Submit
-            </button>
-          </div>
-        </form>
-      </div>
+                <!-- Submit button -->
+                <div class="mt-4">
+                    <button
+                            type="submit"
+                            id="submitBtn"
+                            disabled
+                            name="submitButton"
+                            class="btn btn-primary"
+                    >
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script src="{% static 'js/flatpickr.js' %}"></script>
     <script>
-      document
-        .getElementById("userAgre")
-        .addEventListener("change", function () {
-          document.getElementById("submitBtn").disabled = !this.checked;
-        });
+        document
+            .getElementById("userAgre")
+            .addEventListener("change", function () {
+                document.getElementById("submitBtn").disabled = !this.checked;
+            });
 
-      document.addEventListener("DOMContentLoaded", function () {
-        // Initialize flatpickr
-        flatpickr("#jsPickr", {
-          allowInput: true,
-          monthSelectorType: "static",
-        });
+        document.addEventListener("DOMContentLoaded", function () {
+            // Initialize flatpickr
+            flatpickr("#jsPickr", {
+                allowInput: true,
+                monthSelectorType: "static",
+            });
 
-        flatpickr("#time-picker", {
-          enableTime: true,
-          noCalendar: true,
-          dateFormat: "h:i K", // 12-hour format with AM/PM
-        });
-        // Fetch all the forms we want to apply custom validation styles to
-        // const forms = document.querySelectorAll(".needs-validation");
+            flatpickr("#time-picker", {
+                enableTime: true,
+                noCalendar: true,
+                dateFormat: "h:i K", // 12-hour format with AM/PM
+            });
+            // Fetch all the forms we want to apply custom validation styles to
+            // const forms = document.querySelectorAll(".needs-validation");
 
-        // Loop over them and prevent submission if invalid
+            // Loop over them and prevent submission if invalid
 
-        Array.from(forms).forEach((form) => {
-          form.addEventListener(
-            "submit",
-            (event) => {
-              if (!form.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
-                // Find the first invalid input field and set focus to it
-                const firstInvalidElement = form.querySelector(":invalid");
-                if (firstInvalidElement) {
-                  firstInvalidElement.focus();
-                }
-              }
-              form.classList.add("validate");
-            },
-            false
-          );
+            Array.from(forms).forEach((form) => {
+                form.addEventListener(
+                    "submit",
+                    (event) => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            // Find the first invalid input field and set focus to it
+                            const firstInvalidElement = form.querySelector(":invalid");
+                            if (firstInvalidElement) {
+                                firstInvalidElement.focus();
+                            }
+                        }
+                        form.classList.add("validate");
+                    },
+                    false
+                );
+            });
         });
-      });
     </script>
-  </body>
+    </body>
 
 
 {% endblock %}

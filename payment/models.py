@@ -3,7 +3,7 @@ import uuid
 from django.db import models
 from django.contrib.auth.models import User
 
-from core.models import Event,Profile
+from core.models import Event,Profile,Game
 
 
 # Create your models here.
@@ -18,6 +18,7 @@ class Booking(models.Model):
     is_paid = models.BooleanField(default=False)
     qr_code_id =  models.UUIDField(default=uuid.uuid4,editable=False,unique=True,blank=True)
     qr_image = models.ImageField(upload_to="qr_codes/", null=True, blank=True)
-    is_checked_in =  models.BooleanField(default=False)
+
+    no_of_checkin =  models.PositiveIntegerField(default=0)
     def __str__(self):
         return f"{self.user}"

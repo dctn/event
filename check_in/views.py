@@ -71,14 +71,10 @@ def checkin_ticket(request, qr_id):
     # Get event
     event = booking.event
 
-    # Get current user's profile
-    try:
-        profile = Profile.objects.get(user=request.user)
-    except Profile.DoesNotExist:
-        return HttpResponse("INVALID_TICKET")
+
 
     # SECURITY CHECK — only event owner can scan
-    if event.created_by != profile:
+    if event.created_by != request.user:
         return HttpResponse("NOT_ALLOWED")
 
     # Must be paid ticket
@@ -86,11 +82,14 @@ def checkin_ticket(request, qr_id):
         return HttpResponse("INVALID_TICKET")
 
     # Already scanned
-    if booking.is_checked_in:
+    if booking.no_of_checkin >= event.no_checkin_allowed:
+        # print(booking.no_of_checkin, event.no_checkin_allowed,booking.no_of_checkin <= event.no_checkin_allowed,end='fail')
         return HttpResponse("ALREADY_CHECKED_IN")
 
+    # print(booking.no_of_checkin, event.no_checkin_allowed, booking.no_of_checkin <= event.no_checkin_allowed)
+
     # Mark as checked in
-    booking.is_checked_in = True
+    booking.no_of_checkin += 1
     booking.save()
 
     return HttpResponse("CHECKIN_SUCCESS")
@@ -98,8 +97,7 @@ def checkin_ticket(request, qr_id):
 @login_required
 def qr_scan(request,event_id):
     event = get_object_or_404(Event, event_id=event_id)
-    profile = Profile.objects.get(user=request.user)
-    if event.created_by == profile:
+    if event.created_by == request.user:
         return render(request,"scan_qr.html")
     else:
         messages.error(request,"You are not authorized to scan")

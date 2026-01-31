@@ -81,6 +81,7 @@ class EventForm(forms.ModelForm):
             "password": forms.TextInput(attrs={"class": "grow", "placeholder": "Create password"}),
             "club_name": forms.TextInput(attrs={"class": "input", "placeholder": "Enter Club Name"}),
             "no_of_slots": forms.NumberInput(attrs={"class": "input", "placeholder": "No. of slot available"}),
+            "no_checkin_allowed": forms.NumberInput(attrs={"class": "input", "placeholder": "How many time ticket can be used"}),
 
             "volunteer_name": forms.TextInput(attrs={"class": "input", "placeholder": "organizers name"}),
             "volunteer_phone_no": forms.TextInput(attrs={"class": "input", "placeholder": "organizers Phone no"}),
@@ -111,5 +112,32 @@ class EventForm(forms.ModelForm):
 
             "event_details":forms.Textarea(attrs={"class":"textarea min-h-20 resize-none","id":"userBio","placeholder":"enter details about your event"}),
             "amount": forms.TextInput(attrs={"class": "input", "placeholder": "Enter price per ticket"}),
+
+        }
+
+class GameForm(forms.ModelForm):
+    class Meta:
+        model = Game
+        fields = "__all__"
+        exclude = ["event_id","game_id",]
+
+        widgets = {
+            "name": forms.TextInput(attrs={"class": "input", "placeholder": "IPL Action"}),
+            "img": forms.ClearableFileInput(
+                attrs={"accept": "image/*", "class": "input", "placeholder": "upload your Game pic:",
+                       "type": "file"}),
+            "img_2": forms.ClearableFileInput(
+                attrs={"accept": "image/*", "class": "input", "placeholder": "upload your Game pic:",
+                       "type": "file"}),
+            "img_3": forms.ClearableFileInput(
+                attrs={"accept": "image/*", "class": "input", "placeholder": "upload your Game pic:",
+                       "type": "file"}),
+            "img_4": forms.ClearableFileInput(
+                attrs={"accept": "image/*", "class": "input", "placeholder": "upload your Game pic:",
+                       "type": "file"}),
+
+
+            "event_details": forms.Textarea(attrs={"class": "textarea min-h-20 resize-none", "id": "userBio",
+                                                   "placeholder": "enter details about your game"}),
 
         }

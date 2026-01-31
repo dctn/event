@@ -5,8 +5,13 @@ urlpatterns = [
     path("event/<event_id>",event_details,name="event_details"),
     path("profile/",profile,name="profile"),
     path("profile_register/",profile_form,name="profile_register"),
-    path("profile_register<event_id>//",profile_form,name="profile_register_with_event"),
+    path("profile_register<event_id>/",profile_form,name="profile_register_with_event"),
     path("event_registation/",event_registation,name="event_registation"),
     path("event_update/<event_id>/", event_update, name="event_update"),
     path("CGPA_Calculator/", cgpa, name="CGPA_Calculator"),
+
+    path("games/<event_id>/",game_list,name="game_list"),
+    path("games_details/<game_id>/",game_details,name="game_details"),
+    path("create_game/<event_id>/",create_game,name="create_game"),
+    path("update_game/<game_id>/", update_game, name="update_game"),
 ]

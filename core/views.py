@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.contrib import messages
 from django.conf import settings
 
@@ -48,7 +48,7 @@ def event_details(request, event_id):
                                           razorpay_fee_pct=0.03,
                                           gst_pct=0.18)
 
-    if profile == event.created_by:
+    if request.user == event.created_by:
         is_owner = True
 
     # print(Booking.objects.get(user=profile,event=event,is_paid=True))
@@ -75,6 +75,67 @@ def event_details(request, event_id):
 
     return render(request, "event_details.html", context)
 
+# games view
+def game_list(request,event_id):
+
+    try:
+        games_list = get_list_or_404(Game, event_id=event_id)
+        context = {
+            "all_games": games_list,
+        }
+        return render(request, "games/game_list.html", context)
+    except Exception:
+        return redirect('event_details',event_id=event_id)
+
+
+def game_details(request,game_id):
+    game = get_object_or_404(Game, game_id=game_id)
+    event = game.event_id
+    is_owner = False
+    if request.user == event.created_by:
+        is_owner = True
+    context = {
+        "game": game,
+        "event": event,
+        "is_owner":is_owner
+    }
+    return render(request, "games/game_details.html", context)
+
+def create_game(request,event_id):
+    event = get_object_or_404(Event, event_id=event_id)
+    if request.method == "POST":
+        form = GameForm(request.POST)
+        if form.is_valid():
+            form_data = form.save(commit=False)
+            form_data.event_id = event
+            form_data.save()
+            return redirect("game_details",game_id=form_data.game_id)
+    else:
+        form = GameForm()
+
+    context = {
+        "form": form,
+    }
+    return render(request,"games/game_register.html", context)
+
+
+def update_game(request,game_id):
+    game = get_object_or_404(Game, game_id=game_id)
+    if request.method == "POST":
+        form = GameForm(request.POST, request.FILES,instance=game)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Game Updated")
+            return redirect("game_details",game_id=game_id)
+    else:
+        form = GameForm(instance=game)
+
+    context = {
+        'form': form,
+    }
+    return render(request,"games/game_register.html", context)
+
+
 
 def profile(request):
     user_profile = Profile.objects.get(user=request.user)
@@ -88,7 +149,7 @@ def profile(request):
         'profile': user_profile,
         'all_booking': valid_bookings,
         "registered_count": valid_bookings.count(),
-        "attended_count": valid_bookings.filter(is_checked_in=True).count(),
+        "attended_count": valid_bookings.filter(no_of_checkin__gt=0).count(),
 
     }
     return render(request, "profile.html", context)
@@ -142,8 +203,7 @@ def event_registation(request):
 
 def event_update(request, event_id):
     event = get_object_or_404(Event, event_id=event_id)
-    profile = Profile.objects.get(user=request.user)
-    if profile == event.created_by:
+    if request.user == event.created_by:
         if request.method == "POST":
             form = EventForm(request.POST, request.FILES, instance=event)
             if form.is_valid():

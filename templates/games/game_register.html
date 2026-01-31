@@ -1,0 +1,225 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/flatpickr.css' %}" />
+
+{% endblock %}
+
+{% block body %}
+
+
+  <body data-theme="light">
+    <div
+      class="bg-base-100 w-full max-w-[1100px] mx-auto rounded-lg shadow-base-300/20 shadow-sm"
+    >
+      <h5 class="bg-base-300/10 rounded-t-lg p-4 text-xl font-bold">
+        Game Registration Form
+      </h5>
+      <div class="w-full p-4">
+        <form class="needs-validation peer grid gap-y-4" novalidate method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+          <!-- Account Details -->
+          <div class="w-full">
+            <h6 class="text-lg font-semibold">1. Account Details</h6>
+            <hr class="mb-4 mt-2" />
+          </div>
+
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div>
+              <label class="label-text" for="firstName">Game Name </label>
+
+                {{ form.name }}
+              <span class="error-message">Please enter your name.</span>
+
+              <span class="success-message">Looks good!</span>
+            </div>
+
+
+          </div>
+
+
+          <!-- Personal Info -->
+          <div class="w-full">
+            <hr class="mb-4 mt-2" />
+          </div>
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <!-- all event pics -->
+            <div class="flex flex-col gap-4">
+              <div>
+                <label class="label-text capitalize" for="userProfile"
+                  >Upload event Poster and pics (First image must be poster of Event)
+                </label>
+
+                  {{ form.img }}
+                  <span class="error-message">Please select the file</span>
+                <span class="success-message">Looks good!</span>
+              </div>
+
+              <div>
+                <label class="label-text capitalize" for="userProfile"
+                  >Upload event Poster and pics (optional)</label
+                >
+
+                  {{ form.img_2 }}
+
+                  <span class="error-message">Please select the file</span>
+                <span class="success-message">Looks good!</span>
+              </div>
+
+              <div>
+                <label class="label-text capitalize" for="userProfile"
+                  >Upload event Poster and pics (optional)</label
+                >
+
+                  {{ form.img_3 }}
+
+                <span class="error-message">Please select the file</span>
+                <span class="success-message">Looks good!</span>
+              </div>
+
+              <div>
+                <label class="label-text capitalize" for="userProfile"
+                  >Upload event Poster and pics (optional)</label
+                >
+
+                  {{ form.img_3 }}
+
+
+                <span class="error-message">Please select the file</span>
+                <span class="success-message">Looks good!</span>
+              </div>
+            </div>
+
+            <!-- start and end date -->
+
+          </div>
+
+
+          <div class="w-full">
+            <label class="label-text" for="userBio"
+              >Enter Details about Game:</label
+            >
+
+              {{ form.event_details }}
+
+            <span class="error-message">Please write few words</span>
+            <span class="success-message">Looks good!</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-3">
+
+              <input
+                type="checkbox"
+                id="userSwitch"
+                class="switch switch-primary"
+                required
+              />
+
+              <label class="label-text text-base" for="userSwitch"
+                >Send me related emails</label
+              >
+            </div>
+            <span class="error-message">Please select your preference</span>
+            <span class="success-message">Looks good!</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-3">
+              <input
+                type="checkbox"
+                class="checkbox checkbox-primary"
+                id="userAgre"
+                required
+              />
+              <label class="label-text text-base" for="userAgre"
+                >Agree to our terms and conditions</label
+              >
+            </div>
+            <span class="error-message">Please confirm our T&C</span>
+            <span class="success-message">Looks good!</span>
+          </div>
+
+         {# error msg               #}
+                {% if form.errors %}
+                    <div class="alert alert-error capitalize    ">
+                        <ul>
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <li>{{ field.label }}: {{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+
+          <!-- Submit button -->
+          <div class="mt-4">
+            <button
+              type="submit"
+              id="submitBtn"
+              disabled
+              name="submitButton"
+              class="btn btn-primary"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="{% static 'js/flatpickr.js' %}"></script>
+    <script>
+      document
+        .getElementById("userAgre")
+        .addEventListener("change", function () {
+          document.getElementById("submitBtn").disabled = !this.checked;
+        });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize flatpickr
+        flatpickr("#jsPickr", {
+          allowInput: true,
+          monthSelectorType: "static",
+        });
+
+        flatpickr("#time-picker", {
+          enableTime: true,
+          noCalendar: true,
+          dateFormat: "h:i K", // 12-hour format with AM/PM
+        });
+        // Fetch all the forms we want to apply custom validation styles to
+        // const forms = document.querySelectorAll(".needs-validation");
+
+        // Loop over them and prevent submission if invalid
+
+        Array.from(forms).forEach((form) => {
+          form.addEventListener(
+            "submit",
+            (event) => {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+                // Find the first invalid input field and set focus to it
+                const firstInvalidElement = form.querySelector(":invalid");
+                if (firstInvalidElement) {
+                  firstInvalidElement.focus();
+                }
+              }
+              form.classList.add("validate");
+            },
+            false
+          );
+        });
+      });
+    </script>
+  </body>
+
+
+{% endblock %}

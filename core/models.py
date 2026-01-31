@@ -44,16 +44,16 @@ class EventTypeChoice(models.TextChoices):
 
 class Event(models.Model):
     event_id = models.UUIDField(default=uuid.uuid4,primary_key=True,editable=False)
-    created_by = models.ForeignKey(Profile,on_delete=models.CASCADE,)
+    created_by = models.ForeignKey(User,on_delete=models.CASCADE,)
     name = models.CharField(max_length=255)
     location = models.CharField(max_length=255)
     phone_no = models.CharField(max_length=10,validators=[phone_validator])
     password= models.CharField(max_length=255)
     club_name = models.CharField(max_length=255)
 
-    no_of_slots = models.IntegerField()
-    current_slots = models.IntegerField()
-
+    no_of_slots = models.PositiveIntegerField()
+    current_slots = models.PositiveIntegerField()
+    no_checkin_allowed = models.PositiveIntegerField(default=1)
     event_details = models.TextField()
 
     # event Images
@@ -90,3 +90,18 @@ class Event(models.Model):
     def is_booking_close(self):
         return self.registion_closing_date >= timezone.now().date()
 
+class Game(models.Model):
+    event_id = models.ForeignKey(Event,on_delete=models.CASCADE)
+    game_id = models.UUIDField(default=uuid.uuid4,primary_key=True,editable=False)
+    name = models.CharField(max_length=255)
+
+
+    event_details = models.TextField()
+
+    # game Images
+    img = models.ImageField(upload_to="image/event_img/", default="logo_dot_sm.png")
+    img_2 = models.ImageField(upload_to="image/event_img/",null=True,blank=True)
+    img_3 = models.ImageField(upload_to="image/event_img/",null=True,blank=True)
+
+    def __str__(self):
+        return f"{self.name}"

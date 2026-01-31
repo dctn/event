@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+
+    <!-- nav bar -->
+
+
+    <!-- events -->
+    <div class="events flex flex-col justify-center items-center max-md">
+        {% for game in all_games %}
+                <div class="card m-5 p-5 sm:card-side max-w-sm sm:max-w-full">
+                    <figure><img class="rounded-2xl event_img" src="{{ game.img.url }}" alt="headphone"/></figure>
+                    <div class="card-body ">
+                        <a href="{% url 'game_details' game.game_id %}">
+                            <h5 class="card-title mb-0.5">{{ game.name }}</h5>
+                        </a>
+                        <p class="mb-2 max-w-[630px]">{{ game.event_details|truncatewords:20 }}</p>
+
+
+                        <div class="card-actions">
+{#                            <button class="btn btn-primary"><a href="event_details.html">Register</a></button>#}
+                            <a class="btn  btn-gradient" href="{% url 'game_details' game.game_id %}">View
+                                details</a>
+
+                        </div>
+                    </div>
+                </div>
+
+        {% endfor %}
+
+
+    </div>
+
+{% endblock %}

@@ -149,6 +149,7 @@
                                     <a class="btn btn_primary_color "
                                        download href="{% url 'download_img' event.event_id %}"> download poster
                                     </a>
+
                                     {% if event.event_type == "paid" %}
                                         <h5 class="card-title mb-2.5 capitalize text-2xl">ticket:</h5>
                                         <p class="mb-4 font-mono">Price per ticket: {{ event.amount }}</p>
@@ -188,10 +189,16 @@
                                     {% if is_owner %}
                                         <a href="{% url 'event_update' event.event_id %}"
                                            class="btn btn-primary">Update</a>
+                                         <a href="{% url 'create_game' event.event_id %}"
+                                           class="btn btn-primary">Create Game</a>
                                         <a href="{% url 'qr_scan' event.event_id %}" class="btn btn-gradient">Qr
                                             code</a>
 
                                     {% endif %}
+
+                                 <a class="btn btn_primary_color "
+                                        href="{% url 'game_list' event.event_id %}"> View games
+                                    </a>
                                     </div>
 
 
@@ -219,7 +226,7 @@
                                             </div>
                                             <!-- Confirm Payment Button -->
                                             <div class="mt-6 text-right">
-                                                <button class="btn btn_primary_color " href="#" id="rzp-button1">
+                                                <button class="btn btn_primary_color " id="rzp-button1">
                                                     Checkout
                                                 </button>
                                             </div>
