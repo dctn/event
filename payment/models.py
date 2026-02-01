@@ -8,7 +8,7 @@ from core.models import Event,Profile,Game
 
 # Create your models here.
 class Booking(models.Model):
-    user = models.ForeignKey(Profile,on_delete=models.SET_NULL,null=True)
+    user = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
     event = models.ForeignKey(Event,on_delete=models.SET_NULL,null=True)
     booking_id = models.CharField(max_length=255,null=True,blank=True,editable=False)
     payment_id = models.CharField(max_length=255,null=True,blank=True,editable=False)

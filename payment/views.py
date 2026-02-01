@@ -30,9 +30,8 @@ def calculate_total_charge(product_price, platform_fee_pct, razorpay_fee_pct, gs
 def proccess_order(request,event_id):
 
     client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID,settings.RAZORPAY_KEY_SECRET))
-
+    # print(settings.RAZORPAY_KEY_ID,settings.RAZORPAY_KEY_SECRET)
     event = get_object_or_404(Event,event_id=event_id)
-    profile = get_object_or_404(Profile,user=request.user)
 
     total_amount = calculate_total_charge(product_price=int(event.amount),
                                           platform_fee_pct=float(event.commission),
@@ -46,7 +45,7 @@ def proccess_order(request,event_id):
 
     razorpay_order = client.order.create(data)
     Booking.objects.create(
-        user=profile ,
+        user=request.user ,
         amount_paid=total_amount,
         event=event,
         booking_id=razorpay_order['id']
@@ -108,7 +107,7 @@ def register_free_event(request,event_id,action):
     profile = get_object_or_404(Profile,user=request.user)
     if action == "register":
         booking = Booking.objects.create(
-            user= profile,
+            user= request.user,
             event=event,
             amount_paid=0,
             booking_id=uuid.uuid4()
@@ -130,7 +129,7 @@ def register_free_event(request,event_id,action):
         messages.success(request,"your ticket slot is booked")
         return redirect("profile")
     elif action == "un_register":
-        Booking.objects.get(user=profile,event=event).delete()
+        Booking.objects.get(user=request.user,event=event).delete()
         event.current_slots += 1
         event.save()
         messages.success(request,"your ticket slot is un register")
@@ -146,7 +145,7 @@ def payment_success(request,booking_id):
         return redirect('profile_register')
 
     try:
-        booking = get_object_or_404(Booking,booking_id=booking_id,user=profile)
+        booking = get_object_or_404(Booking,booking_id=booking_id,user=request.user)
         if not booking.qr_image:
             qr_url = request.build_absolute_uri(
                 reverse("checkin_ticket", args=[booking.qr_code_id])

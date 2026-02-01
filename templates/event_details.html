@@ -150,9 +150,14 @@
                                        download href="{% url 'download_img' event.event_id %}"> download poster
                                     </a>
 
+                                    <p class="mb-4 font-mono bg-warning text-white font-bold p-2" style="border-radius: 10px">No of game allowed per
+                                        ticker: {{ event.no_checkin_allowed }}</p>
+
+
                                     {% if event.event_type == "paid" %}
                                         <h5 class="card-title mb-2.5 capitalize text-2xl">ticket:</h5>
                                         <p class="mb-4 font-mono">Price per ticket: {{ event.amount }}</p>
+
                                         <div class="card-actions">
                                         {% if is_already_registered %}
                                             <p class="mb-4 font-mono">You already register this event</p>
@@ -174,7 +179,7 @@
                                         <p class="mb-4 font-mono">Price per ticket: Free</p>
                                         <div class="card-actions">
                                         {% if is_already_registered %}
-                                            <p class="mb-4 font-mono">You already register this event</p>
+                                            <p class="mb-4 font-mono ">You already register this event</p>
                                             <a class="btn btn_primary_color "
                                                href="{% url 'register_free_event' event.event_id 'un_register' %}">UnRegister
                                             </a>
@@ -189,15 +194,15 @@
                                     {% if is_owner %}
                                         <a href="{% url 'event_update' event.event_id %}"
                                            class="btn btn-primary">Update</a>
-                                         <a href="{% url 'create_game' event.event_id %}"
+                                        <a href="{% url 'create_game' event.event_id %}"
                                            class="btn btn-primary">Create Game</a>
                                         <a href="{% url 'qr_scan' event.event_id %}" class="btn btn-gradient">Qr
                                             code</a>
 
                                     {% endif %}
 
-                                 <a class="btn btn_primary_color "
-                                        href="{% url 'game_list' event.event_id %}"> View games
+                                    <a class="btn btn_primary_color "
+                                       href="{% url 'game_list' event.event_id %}"> View games
                                     </a>
                                     </div>
 

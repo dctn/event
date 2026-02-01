@@ -55,11 +55,11 @@ def event_details(request, event_id):
 
     try:
         if event.event_type == "paid":
-            is_paid = Booking.objects.get(user=profile, event=event, is_paid=True)
+            is_paid = Booking.objects.get(user=request.user, event=event, is_paid=True)
             if is_paid:
                 is_already_registered = True
         elif event.event_type == "free":
-            if Booking.objects.get(event=event_id, user=profile):
+            if Booking.objects.get(event=event_id, user=request.user):
                 is_already_registered = True
     except:
         pass
@@ -139,7 +139,7 @@ def update_game(request,game_id):
 
 def profile(request):
     user_profile = Profile.objects.get(user=request.user)
-    user_event = Booking.objects.filter(user=user_profile)
+    user_event = Booking.objects.filter(user=request.user)
     valid_bookings = user_event.filter(
         Q(is_paid=True, event__event_type="paid", ) |
         Q(is_paid=False, event__event_type="free")
@@ -187,8 +187,7 @@ def event_registation(request):
         form = EventForm(request.POST, request.FILES)
         if form.is_valid():
             event = form.save(commit=False)
-            profile = get_object_or_404(Profile, user=request.user)
-            event.created_by = profile
+            event.created_by = request.user
             event.current_slots = event.no_of_slots
             event.save()
             messages.success(request, "Your event is Created")
@@ -205,9 +204,21 @@ def event_update(request, event_id):
     event = get_object_or_404(Event, event_id=event_id)
     if request.user == event.created_by:
         if request.method == "POST":
+            old_no_of_slots = event.no_of_slots
+            old_current_slots = event.current_slots
             form = EventForm(request.POST, request.FILES, instance=event)
             if form.is_valid():
-                form.save()
+                form_data = form.save(commit=False)
+                sold_slots = old_no_of_slots - old_current_slots
+
+                # no of slot must be higher sold slots
+                if form_data.no_of_slots <= sold_slots:
+                    messages.error(request, f"Total slots cannot be less than sold slots ({sold_slots})")
+                    return redirect("event_details", event.event_id)
+
+                form_data.current_slots = form_data.no_of_slots - sold_slots
+                form_data.save()
+
                 messages.success(request, "Your event Details is updated")
                 return redirect("event_details", event_id)
         else:
