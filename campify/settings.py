@@ -199,6 +199,16 @@ CASHFREE_CLIENT_SECRET = os.getenv("CASHFREE_CLIENT_SECRET")
 if not CASHFREE_CLIENT_SECRET:
     raise Exception("Missing CASHFREE_CLIENT_SECRET environment variable")
 
+PROD_CASHFREE_CLIENT_ID = os.getenv("PROD_CASHFREE_CLIENT_ID")
+if not PROD_CASHFREE_CLIENT_ID:
+    raise Exception("Missing PROD_CASHFREE_CLIENT_ID environment variable")
+
+PROD_CASHFREE_CLIENT_SECRET = os.getenv("PROD_CASHFREE_CLIENT_SECRET")
+if not PROD_CASHFREE_CLIENT_SECRET:
+    raise Exception("Missing PROD_CASHFREE_CLIENT_SECRET environment variable")
+
+
+
 RAZOR_PAY_CALLBACK_URL = "payment_verify"
 
 # storage
