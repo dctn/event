@@ -150,7 +150,8 @@
                                        download href="{% url 'download_img' event.event_id %}"> download poster
                                     </a>
 
-                                    <p class="mb-4 font-mono bg-warning text-white font-bold p-2" style="border-radius: 10px">No of game allowed per
+                                    <p class="mb-4 font-mono bg-warning text-white font-bold p-2"
+                                       style="border-radius: 10px">No of game allowed per
                                         ticker: {{ event.no_checkin_allowed }}</p>
 
 
@@ -161,6 +162,8 @@
                                         <div class="card-actions">
                                         {% if is_already_registered %}
                                             <p class="mb-4 font-mono">You already register this event</p>
+                                        {% elif event.current_slots == 0 %}
+                                            <p class="mb-4 font-mono">All seats are fulled</p>
                                         {% else %}
                                             <button id="openCheckoutModal"
                                                     class="btn btn-primary px-4 py-2 rounded bg-purple-600 text-white">
@@ -169,8 +172,7 @@
 
                                         {% endif %}
 
-                                    {% elif event.current_slots == 0 %}
-                                        <p class="mb-4 font-mono">All seats are fulled</p>
+
                                     {% elif not event.is_booking_close %}
                                         <p class="mb-4 font-mono">Booking Date is closed</p>
 
@@ -290,49 +292,75 @@
                     </div>
                 </div>
 
-                <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+                {#            <--- razorpay --->  #}
+                {#                <script src="https://checkout.razorpay.com/v1/checkout.js"></script>#}
+                {##}
+                {##}
+                {#                <script>#}
+                {#                    document.getElementById("rzp-button1").addEventListener("click", async function (e) {#}
+                {#                        e.preventDefault();#}
+                {##}
+                {#                        let response = await fetch("{% url 'proccess_order' event.event_id %}", {#}
+                {#                            method: "POST",#}
+                {#                            headers: {#}
+                {#                                "X-CSRFToken": "{{ csrf_token }}", // Only if CSRF is required#}
+                {#                                "Content-Type": "application/json"#}
+                {#                            }#}
+                {#                        });#}
+                {##}
+                {#                        let data = await response.json();#}
+                {##}
+                {#                        var options = {#}
+                {#                            "key": data.RAZORPAY_KEY_ID,#}
+                {#                            "amount": data.amount,#}
+                {#                            "currency": "INR",#}
+                {#                            "name": "Campify",#}
+                {#                            "description": "Transaction",#}
+                {#                            "image": "https://example.com/your_logo",#}
+                {#                            "order_id": data.order_id,#}
+                {#                            "callback_url": data.callback_url,#}
+                {#                            "notes": {#}
+                {#                                "address": "Campify Events"#}
+                {#                            },#}
+                {#                            "theme": {#}
+                {#                                "color": "#3399cc"#}
+                {#                            }#}
+                {#                        };#}
+                {##}
+                {#                        var rzp1 = new Razorpay(options);#}
+                {##}
+                {#                        rzp1.on('payment.failed', function (response) {#}
+                {#                            alert("Payment failed: " + response.error.description);#}
+                {#                        });#}
+                {##}
+                {#                        rzp1.open();#}
+                {#                    });#}
+                {#                </script>#}
 
+
+                {#             <--- cashfree --->   #}
+                <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
 
                 <script>
-                    document.getElementById("rzp-button1").addEventListener("click", async function (e) {
-                        e.preventDefault();
+                    const cashfree = Cashfree({mode: "{{ env }}"});
 
-                        let response = await fetch("{% url 'proccess_order' event.event_id %}", {
+                    document.getElementById("rzp-button1").addEventListener("click", async () => {
+                        console.log("Checkout button clicked ✅");
+
+                        const res = await fetch("{% url 'process_order_cashfree' event.event_id  %}", {
                             method: "POST",
-                            headers: {
-                                "X-CSRFToken": "{{ csrf_token }}", // Only if CSRF is required
-                                "Content-Type": "application/json"
-                            }
+                            headers: {"X-CSRFToken": "{{ csrf_token }}"}
                         });
 
-                        let data = await response.json();
+                        const data = await res.json();
 
-                        var options = {
-                            "key": data.RAZORPAY_KEY_ID,
-                            "amount": data.amount,
-                            "currency": "INR",
-                            "name": "Campify",
-                            "description": "Transaction",
-                            "image": "https://example.com/your_logo",
-                            "order_id": data.order_id,
-                            "callback_url": data.callback_url,
-                            "notes": {
-                                "address": "Campify Events"
-                            },
-                            "theme": {
-                                "color": "#3399cc"
-                            }
-                        };
-
-                        var rzp1 = new Razorpay(options);
-
-                        rzp1.on('payment.failed', function (response) {
-                            alert("Payment failed: " + response.error.description);
+                        cashfree.checkout({
+                            paymentSessionId: data.payment_session_id,
+                            redirectTarget: "_self"
                         });
-
-                        rzp1.open();
                     });
                 </script>
+
 
                 <script>
                     const openBtn = document.getElementById('openCheckoutModal');

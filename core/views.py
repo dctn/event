@@ -7,6 +7,7 @@ from django.conf import settings
 from payment.models import Booking
 from .forms import *
 from .models import *
+import os
 
 
 def calculate_total_charge(product_price, platform_fee_pct, razorpay_fee_pct, gst_pct):
@@ -64,6 +65,8 @@ def event_details(request, event_id):
     except:
         pass
 
+    env = "sandbox" if os.environ.get("ENVIRONMENT") != "production" else "production"
+
     context = {
         'event': event,
         "is_owner": is_owner,
@@ -71,6 +74,7 @@ def event_details(request, event_id):
         "platform": total_amount["platform_fee"],
         "razorpay_fee_rate": total_amount["razorpay_fee_rate"],
         "total_charge": total_amount["total_charge"],
+        'env':env,
     }
 
     return render(request, "event_details.html", context)
@@ -212,7 +216,7 @@ def event_update(request, event_id):
                 sold_slots = old_no_of_slots - old_current_slots
 
                 # no of slot must be higher sold slots
-                if form_data.no_of_slots <= sold_slots:
+                if form_data.no_of_slots < sold_slots:
                     messages.error(request, f"Total slots cannot be less than sold slots ({sold_slots})")
                     return redirect("event_details", event.event_id)
 

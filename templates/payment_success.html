@@ -3,71 +3,76 @@
 
 {% block body %}
 
-<div class="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+    <div class="min-h-screen bg-gray-100 flex items-center justify-center p-4">
 
-    <div class="card bg-base-100 shadow-xl rounded-2xl w-full max-w-xl p-8">
+        <div class="card bg-base-100 shadow-xl rounded-2xl w-full max-w-xl p-8">
 
-        <!-- Success Badge -->
-        <div class="flex justify-center mb-6">
-            <div class="badge badge-success text-white text-lg p-4 rounded-xl">
-                ✔️ Payment Successful
-            </div>
-        </div>
-
-        <!-- Event & Ticket Info -->
-        <div class="text-center mb-4">
-            <h1 class="text-4xl font-bold text-gray-900">{{ booking.event.name }}</h1>
-
-            <p class="text-gray-600 text-lg mt-2">
-                Your ticket has been successfully booked! <br>
-                <span style="color: red">Don't this share this image</span>
-            </p>
-            <h1 class="text-xl font-bold text-gray-900">Booking ID: {{ booking.booking_id }}</h1>
-             <p class="text-gray-700 mt-4 text-center">
-                Show this QR at event check-in to validate your entry.
-            </p>
-        </div>
-
-        <hr class="my-6 border-gray-300">
-
-        <!-- QR Code Box -->
-        <div class="flex flex-col items-center">
-            <div class="p-4 bg-gray-50 rounded-xl shadow-inner">
-                <img src="{{ booking.qr_image.url }}"
-                     alt="QR Code Ticket"
-                     class="w-48 md:w-56 rounded-lg shadow-lg">
+            <!-- Success Badge -->
+            <div class="flex justify-center mb-6">
+                <div class="badge badge-success text-white text-lg p-4 rounded-xl">
+                    {% if status %}
+                        {{ status }}
+                    {% else %}
+                        ✔️ Payment Successful
+                    {% endif %}
+                </div>
             </div>
 
+        {% if is_success %}
+            <!-- Event & Ticket Info -->
+            <div class="text-center mb-4">
+                <h1 class="text-4xl font-bold text-gray-900">{{ booking.event.name }}</h1>
 
-        </div>
+                <p class="text-gray-600 text-lg mt-2">
+                    Your ticket has been successfully booked! <br>
+                    <span style="color: red">Don't this share this image</span>
+                </p>
+                <h1 class="text-xl font-bold text-gray-900">Booking ID: {{ booking.booking_id }}</h1>
+                <p class="text-gray-700 mt-4 text-center">
+                    Show this QR at event check-in to validate your entry.
+                </p>
+            </div>
 
-        <hr class="my-6 border-gray-300">
+            <hr class="my-6 border-gray-300">
 
-        <!-- Buttons Section -->
-        <div class="flex flex-col gap-3 items-center">
+            <!-- QR Code Box -->
+            <div class="flex flex-col items-center">
+                <div class="p-4 bg-gray-50 rounded-xl shadow-inner">
+                    <img src="{{ booking.qr_image.url }}"
+                         alt="QR Code Ticket"
+                         class="w-48 md:w-56 rounded-lg shadow-lg">
+                </div>
 
-            <!-- Download QR -->
-            <a href="{% url 'download_qr' booking.booking_id %}"
-               download
-               class="btn btn-primary  sm:w-3/4 md:w-2/3 lg:w-1/2">
-                Download QR Code
-            </a>
 
-            <!-- Profile -->
-            <a href="{% url 'profile' %}"
-               class="btn btn-primary  sm:w-3/4 md:w-2/3 lg:w-1/2">
-                View My Profile
-            </a>
+            </div>
 
-            <!-- Back to Event -->
-            <a href="{% url 'event_details' booking.event.event_id %}"
-               class="btn btn-outline sm:w-3/4 md:w-2/3 lg:w-1/2">
-                Back to Event Page
-            </a>
+            <hr class="my-6 border-gray-300">
+
+            <!-- Buttons Section -->
+            <div class="flex flex-col gap-3 items-center">
+
+                <!-- Download QR -->
+                <a href="{% url 'download_qr' booking.booking_id %}"
+                   download
+                   class="btn btn-primary  sm:w-3/4 md:w-2/3 lg:w-1/2">
+                    Download QR Code
+                </a>
+
+                <!-- Profile -->
+                <a href="{% url 'profile' %}"
+                   class="btn btn-primary  sm:w-3/4 md:w-2/3 lg:w-1/2">
+                    View My Profile
+                </a>
+
+                <!-- Back to Event -->
+                <a href="{% url 'event_details' booking.event.event_id %}"
+                   class="btn btn-outline sm:w-3/4 md:w-2/3 lg:w-1/2">
+                    Back to Event Page
+                </a>
+            </div>
+        {% endif %}
         </div>
 
     </div>
-
-</div>
 
 {% endblock %}
