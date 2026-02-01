@@ -30,11 +30,6 @@ cashfree.XClientId = settings.CASHFREE_CLIENT_ID
 cashfree.XClientSecret = settings.CASHFREE_CLIENT_SECRET
 
 
-if os.environ.get("ENVIRONMENT") == "production":
-    cashfree = Cashfree(XEnvironment=Cashfree.PRODUCTION)
-    cashfree.XClientId = settings.PROD_CASHFREE_CLIENT_ID
-    cashfree.XClientSecret = settings.PROD_CASHFREE_CLIENT_SECRET
-
 def calculate_total_charge(product_price, platform_fee_pct, razorpay_fee_pct, gst_pct):
     pre_fee = product_price * (1 + platform_fee_pct)
     razorpay_fee_rate = razorpay_fee_pct * (1 + gst_pct)
